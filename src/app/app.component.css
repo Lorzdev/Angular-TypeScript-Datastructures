@@ -1,0 +1,49 @@
+/* General reset for all elements */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Styling for the navigation bar */
+nav {
+  background: linear-gradient(45deg, #333, #14637d); /* Gradient background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  border-radius: 0 0 15px 15px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap; /* Wrap items into multiple lines if necessary */
+  gap: 30px;
+  justify-content: center; /* Center the menu items */
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 20px;
+  transition: all 0.3s ease-in-out;
+  background-color: rgba(255, 255, 255, 0.1); /* Transparent background */
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+
+nav ul li a:hover {
+  background-color: #218536;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Hover shadow effect */
+  transform: translateY(-3px); /* Lifting effect on hover */
+}
