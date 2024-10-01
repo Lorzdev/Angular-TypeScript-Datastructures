@@ -6,10 +6,13 @@ import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule } from "@angular/forms";
 import {StudentlistComponent} from "./components/studentlist/studentlist.component";
+import {EmployeeListComponent} from "./components/employee-list/employee-list.component";
 
 
 const routes: Routes = [
   {path: '', component: StudentlistComponent},
+  {path: 'employee-list', component: EmployeeListComponent},
+
 
 ]
 
@@ -25,6 +28,7 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     StudentlistComponent,
+    EmployeeListComponent
   ],
 
   providers: [
