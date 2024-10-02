@@ -1,0 +1,14 @@
+<div class="animal-list-container">
+  <p>Animal List works!</p>
+
+  <input type="text" [(ngModel)]="animalName" placeholder="Enter animal name" />
+
+  <button (click)="addAnimal()">Add Animal</button>
+
+  <ul>
+    <li *ngFor="let animal of animalList">
+      {{ animal }}
+      <button (click)="removeAnimal(animal)">Remove</button>
+    </li>
+  </ul>
+</div>
