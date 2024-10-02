@@ -1,51 +1,58 @@
-.employee-list-container {
-  border: 2px solid #237827;
+.fruit-list-container {
+  border: 2px solid #FF9800;
   padding: 20px;
   border-radius: 8px;
   background-color: #f9f9f9;
-  max-width: 600px;
+  max-width: 400px;
   margin: 20px auto;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 
+h2 {
+  text-align: center;
+  color: #FF9800;
+}
+
+
 input {
   border: 2px solid #2196F3;
-  padding: 8px;
+  padding: 10px;
   margin-right: 10px;
   border-radius: 4px;
-  width: calc(33.33% - 10px);
+  width: 80%;
   box-sizing: border-box;
   font-size: 16px;
 }
 
 button {
-  background-color: #218536;
+  background-color: #4CAF50;
   color: white;
-  padding: 8px 16px;
+  padding: 10px 16px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin: 10px;
 }
 
+
 button:hover {
-  background-color: #0931ac;
+  background-color: #388E3C;
 }
+
 
 ul {
   list-style-type: none;
   padding: 0;
 }
 
-
 li {
-  background-color: #e0f7fa;
+  background-color: #FFFDE7;
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 4px;
-  border: 1px solid #2196F3;
+  border: 1px solid #FF9800;
   transition: transform 0.2s ease;
 }
 
