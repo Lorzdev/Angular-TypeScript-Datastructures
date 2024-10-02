@@ -1,0 +1,15 @@
+<div class="movie-list-container">
+  <p>Movie List work!</p>
+
+  <input type="text" [(ngModel)]="movieTitle" placeholder="Enter movie title" />
+  <input type="text" [(ngModel)]="directorName" placeholder="Enter director name" />
+
+  <button (click)="addMovie()">Add Movie</button>
+
+  <ul>
+    <li *ngFor="let movie of movieList">
+      {{ movie.title }} by {{ movie.director }}
+      <button (click)="removeMovie(movie)">Remove</button>
+    </li>
+  </ul>
+</div>
