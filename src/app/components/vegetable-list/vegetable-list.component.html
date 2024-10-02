@@ -1,0 +1,14 @@
+<div class="vegetable-list-container">
+  <p>Vegetable List works!</p>
+
+  <input type="text" [(ngModel)]="vegetableName" placeholder="Enter vegetable name" />
+
+  <button (click)="addVegetable()">Add Vegetable</button>
+
+  <ul>
+    <li *ngFor="let vegetable of vegetableList">
+      {{ vegetable }}
+      <button (click)="removeVegetable(vegetable)">Remove</button>
+    </li>
+  </ul>
+</div>
