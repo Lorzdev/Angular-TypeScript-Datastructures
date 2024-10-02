@@ -1,0 +1,14 @@
+<div class="subject-list-container">
+  <p>Subject List</p>
+
+  <input type="text" [(ngModel)]="subjectName" placeholder="Enter subject name" />
+
+  <button (click)="addSubject()">Add Subject</button>
+
+  <ul>
+    <li *ngFor="let subject of subjectList">
+      {{ subject }}
+      <button (click)="removeSubject(subject)">Remove</button>
+    </li>
+  </ul>
+</div>

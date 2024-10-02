@@ -1,4 +1,4 @@
-.student-list-container {
+.subject-list-container{
   border: 1px solid #3F51B5;
   padding: 20px;
   border-radius: 8px;
@@ -37,15 +37,30 @@ button:hover {
 ul {
   list-style-type: none;
   padding: 0;
+  margin-top: 20px;
 }
 
 li {
-  background-color: #e0f7fa;
+  background-color: #FFF3E0;
   margin-bottom: 10px;
-  padding: 5px;
-  border-radius: 4px;
+  padding: 1px;
+  border-radius: 8px;
   border: 1px solid #2196F3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s ease;
 }
+
 li:hover {
   transform: scale(1.02);
+}
+
+li button {
+  margin-left: 20px;
+  background-color: #ae1818;
+}
+
+li button:hover {
+  background-color: #1bcc38;
 }
