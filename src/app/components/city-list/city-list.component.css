@@ -1,10 +1,10 @@
-.book-list-container {
+.city-list-container {
   border: 2px solid #237827;
-  padding: 20px;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  max-width: 600px;
-  margin: 20px auto;
+padding: 20px;
+border-radius: 8px;
+background-color: #f9f9f9;
+max-width: 600px;
+margin: 20px auto;
 }
 
 input {

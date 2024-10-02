@@ -1,0 +1,14 @@
+<div class="city-list-container">
+  <p>City List works!</p>
+
+  <input type="text" [(ngModel)]="cityName" placeholder="Enter city name" />
+
+  <button (click)="addCity()">Add City</button>
+
+  <ul>
+    <li *ngFor="let city of cityList">
+      {{ city }}
+      <button (click)="removeCity(city)">Remove</button>
+    </li>
+  </ul>
+</div>
