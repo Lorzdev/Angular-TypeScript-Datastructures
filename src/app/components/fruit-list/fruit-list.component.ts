@@ -6,16 +6,17 @@ import { Component } from '@angular/core';
   styleUrl: './fruit-list.component.css'
 })
 export class FruitListComponent {
-
   fruitName: string = '';
   fruitList: string[] = [];
 
   addFruit() {
-    if (this.fruitName.trim()) {
-      this.fruitList.push(this.fruitName.trim());
+    if (this.fruitName) {
+      this.fruitList.push(this.fruitName);
       this.fruitName = '';
-    } else {
-      console.log('Please enter a fruit name.');
     }
+  }
+
+  removeFruit(index: number) {
+    this.fruitList.splice(index, 1);
   }
 }

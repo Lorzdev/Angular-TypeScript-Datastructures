@@ -1,5 +1,5 @@
 <div class="employee-list-container">
-  <p>Employee List works!</p>
+  <p>Employee List work!</p>
 
   <input type="text" [(ngModel)]="name" placeholder="Enter employee name" />
   <input type="text" [(ngModel)]="position" placeholder="Enter position" />
@@ -8,9 +8,9 @@
   <button (click)="addEmployee()">Add Employee</button>
 
   <ul>
-    <li *ngFor="let employee of employeeList">
-     Name: {{ employee.name }} , Position: {{ employee.position }}, Department: {{ employee.department }}
+    <li *ngFor="let employee of employeeList; let i = index">
+      Name: {{ employee.name }} , Position: {{ employee.position }}, Department: {{ employee.department }}
+      <button class="remove-btn" (click)="removeEmployee(i)">Remove</button>
     </li>
   </ul>
 </div>
-

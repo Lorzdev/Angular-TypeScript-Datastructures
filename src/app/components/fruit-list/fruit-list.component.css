@@ -37,26 +37,40 @@ button {
 }
 
 
+
 button:hover {
-  background-color: #388E3C;
+  background-color: #df6a22;
 }
 
 
 ul {
   list-style-type: none;
   padding: 0;
+  margin-top: 20px;
 }
 
 li {
-  background-color: #FFFDE7;
+  background-color: #FFF3E0;
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 4px;
   border: 1px solid #FF9800;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   transition: transform 0.2s ease;
 }
 
-
 li:hover {
   transform: scale(1.02);
+}
+
+li button {
+  margin-left: 20px;
+  background-color: #ae1818;
+}
+
+li button:hover {
+  background-color:  #1bcc38;
 }

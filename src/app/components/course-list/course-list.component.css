@@ -1,21 +1,32 @@
-.employee-list-container {
-  border: 2px solid #237827;
+.course-list-container {
+  border: 2px solid #2196F3;
   padding: 20px;
   border-radius: 8px;
-  background-color: #f9f9f9;
-  max-width: 600px;
+  background-color: #f1f1f1;
+  max-width: 500px;
   margin: 20px auto;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+h2 {
+  text-align: center;
+  color: #2196F3;
+}
+
+.add-course {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
 input {
   border: 2px solid #2196F3;
-  padding: 8px;
-  margin-right: 10px;
+  padding: 10px;
   border-radius: 4px;
-  width: calc(33.33% - 10px);
+  width: calc(70% - 12px);
   box-sizing: border-box;
-  font-size: 16px;
+  margin-right: 10px;
 }
 
 button {
@@ -26,7 +37,6 @@ button {
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin: 10px;
 }
 
 button:hover {
@@ -36,10 +46,11 @@ button:hover {
 ul {
   list-style-type: none;
   padding: 0;
+  margin-top: 20px;
 }
 
 li {
-  background-color: #e0f7fa;
+  background-color: #FFF3E0;
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 4px;
@@ -54,15 +65,11 @@ li:hover {
   transform: scale(1.02);
 }
 
-.remove-btn {
-  background-color: #dc3545;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  color: white;
+li button {
+  margin-left: 20px;
+  background-color: #ae1818;
 }
 
-.remove-btn:hover {
-  background-color: #1bcc38
+li button:hover {
+  background-color: #1bcc38;
 }
