@@ -45,3 +45,17 @@ nav ul li a:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   transform: translateY(-3px);
 }
+
+
+/* Responsive design for smaller screens */
+@media (max-width: 1000px) {
+  nav {
+    flex-direction: column;
+  }
+
+  nav a {
+    margin-bottom: 5px;
+    font-size: 1rem;
+    padding: 0.5rem 0.8rem;
+  }
+}

@@ -1,0 +1,15 @@
+<div class="book-list-container">
+  <p>Book List works!</p>
+
+  <input type="text" [(ngModel)]="bookTitle" placeholder="Enter book title" />
+  <input type="text" [(ngModel)]="authorName" placeholder="Enter author name" />
+
+  <button (click)="addBook()">Add Book</button>
+
+  <ul>
+    <li *ngFor="let book of bookList">
+      {{ book.title }} by {{ book.author }}
+      <button (click)="removeBook(book)">Remove</button>
+    </li>
+  </ul>
+</div>

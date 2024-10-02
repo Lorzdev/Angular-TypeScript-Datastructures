@@ -1,44 +1,36 @@
-.fruit-list-container {
-  border: 2px solid #FF9800;
+.book-list-container {
+  border: 2px solid #2196F3;
   padding: 20px;
   border-radius: 8px;
   background-color: #f9f9f9;
-  max-width: 400px;
+  max-width: 600px;
   margin: 20px auto;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
-
-
-h2 {
-  text-align: center;
-  color: #FF9800;
-}
-
 
 input {
   border: 2px solid #2196F3;
-  padding: 10px;
+  padding: 8px;
   margin-right: 10px;
   border-radius: 4px;
-  width: 80%;
+  width: calc(33.33% - 10px);
   box-sizing: border-box;
 }
 
+
 button {
-  background-color: #4CAF50;
+  background-color: #218536;
   color: white;
-  padding: 10px 16px;
+  padding: 8px 16px;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
   margin: 10px;
+  transition: background-color 0.3s ease;
 }
 
 
-
 button:hover {
-  background-color: #df6a22;
+  background-color: #2196F3;
 }
 
 
@@ -52,9 +44,8 @@ li {
   background-color: #FFF3E0;
   margin-bottom: 10px;
   padding: 1px;
-  border-radius: 4px;
-  border: 1px solid #FF9800;
-  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #2196F3;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -71,5 +62,5 @@ li button {
 }
 
 li button:hover {
-  background-color:  #1bcc38;
+  background-color: #1bcc38;
 }

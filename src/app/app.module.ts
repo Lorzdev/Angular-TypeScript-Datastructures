@@ -9,6 +9,7 @@ import {StudentlistComponent} from "./components/studentlist/studentlist.compone
 import {EmployeeListComponent} from "./components/employee-list/employee-list.component";
 import {FruitListComponent} from "./components/fruit-list/fruit-list.component";
 import {CourseListComponent} from "./components/course-list/course-list.component";
+import {BookListComponent} from "./components/book-list/book-list.component";
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'employee-list', component: EmployeeListComponent},
   {path: 'fruit-list', component: FruitListComponent},
   {path: 'course-list', component: CourseListComponent},
+  {path: 'book-list', component: BookListComponent},
 
 
 ]
@@ -35,6 +37,7 @@ const routes: Routes = [
     EmployeeListComponent,
     FruitListComponent,
     CourseListComponent,
+    BookListComponent
   ],
 
   providers: [
