@@ -52,6 +52,7 @@ import {BudgetListComponent} from "./components/budget-list/budget-list.componen
 import {PresentationListComponent} from "./components/presentation-list/presentation-list.component";
 import {TourListComponent} from "./components/tour-list/tour-list.component";
 import {EventListComponent} from "./components/event-list/event-list.component";
+import {DeveloperToolsListComponent} from "./components/developer-tools-list/developer-tools-list.component";
 
 
 const routes: Routes = [
@@ -102,10 +103,7 @@ const routes: Routes = [
   {path: 'presentation-list', component:   PresentationListComponent},
   {path: 'tour-list', component:   TourListComponent},
   {path: 'event-list', component:   EventListComponent},
-
-
-
-
+  {path: 'developer-tools-list', component:   DeveloperToolsListComponent},
 
 
 
@@ -171,6 +169,7 @@ const routes: Routes = [
     PresentationListComponent,
     TourListComponent,
     EventListComponent,
+    DeveloperToolsListComponent,
   ],
 
   providers: [
