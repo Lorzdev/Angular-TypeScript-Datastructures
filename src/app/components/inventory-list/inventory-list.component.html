@@ -1,0 +1,13 @@
+<div class="inventory-container">
+  <p>Inventory List works!</p>
+
+  <input type="text" [(ngModel)]="inventoryItem" placeholder="Enter inventory item" />
+  <button (click)="addInventoryItem()">Add Item</button>
+
+  <ul>
+    <li *ngFor="let item of inventoryList">
+      {{ item }}
+      <button (click)="removeInventoryItem(item)">Remove</button>
+    </li>
+  </ul>
+</div>
