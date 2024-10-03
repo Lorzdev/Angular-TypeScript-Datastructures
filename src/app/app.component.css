@@ -48,9 +48,10 @@ nav ul li a:hover {
 
 
 /* Responsive design for smaller screens */
-@media (max-width: 1000px) {
+@media (max-width: 769px) {
   nav {
     flex-direction: column;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   nav a {
