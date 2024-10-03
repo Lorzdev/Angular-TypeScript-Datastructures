@@ -1,0 +1,13 @@
+<div class="artist-container">
+  <p>Artist List works!</p>
+
+  <input type="text" [(ngModel)]="artistName" placeholder="Enter artist name" />
+  <button (click)="addArtist()">Add Artist</button>
+
+  <ul>
+    <li *ngFor="let artist of artistList">
+      {{ artist }}
+      <button (click)="removeArtist(artist)">Remove</button>
+    </li>
+  </ul>
+</div>
