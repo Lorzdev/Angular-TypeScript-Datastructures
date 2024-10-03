@@ -1,0 +1,13 @@
+<div class="painting-container">
+  <P>Painting List works</P>
+
+  <input type="text" [(ngModel)]="paintingName" placeholder="Enter painting name" />
+  <button (click)="addPainting()">Add Painting</button>
+
+  <ul>
+    <li *ngFor="let painting of paintingList">
+      {{ painting }}
+      <button (click)="removePainting(painting)">Remove</button>
+    </li>
+  </ul>
+</div>
