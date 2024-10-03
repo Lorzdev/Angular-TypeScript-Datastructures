@@ -1,0 +1,13 @@
+<div class="flower-container">
+  <p>Flower List works!</p>
+
+  <input type="text" [(ngModel)]="flowerName" placeholder="Enter flower name" />
+  <button (click)="addFlower()">Add Flower</button>
+
+  <ul>
+    <li *ngFor="let flower of flowerList">
+      {{ flower }}
+      <button (click)="removeFlower(flower)">Remove</button>
+    </li>
+  </ul>
+</div>
