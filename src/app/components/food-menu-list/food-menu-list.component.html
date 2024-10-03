@@ -1,0 +1,15 @@
+<div class="menu-container">
+  <p>Food Menu works!</p>
+
+  <input type="text" [(ngModel)]="foodItem" placeholder="Enter food item" />
+  <input type="text" [(ngModel)]="foodPrice" placeholder="Enter price" />
+
+  <button (click)="addFoodItem()">Add Food Item</button>
+
+  <ul>
+    <li *ngFor="let item of foodMenu">
+      {{ item.name }} - ${{ item.price }}
+      <button (click)="removeFoodItem(item)">Remove</button>
+    </li>
+  </ul>
+</div>
