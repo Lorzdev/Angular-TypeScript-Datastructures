@@ -38,6 +38,7 @@ import {LaptopSpecificationsListComponent} from "./components/laptop-specificati
 import {ComputerHardwareListComponent} from "./components/computer-hardware-list/computer-hardware-list.component";
 import {MobileAppListComponent} from "./components/mobile-app-list/mobile-app-list.component";
 import {VideoListComponent} from "./components/video-list/video-list.component";
+import {TVShowListComponent} from "./components/tvshow-list/tvshow-list.component";
 
 
 const routes: Routes = [
@@ -74,6 +75,7 @@ const routes: Routes = [
   {path: 'computer-hardware-list', component:  ComputerHardwareListComponent},
   {path: 'mobile-app-list', component:  MobileAppListComponent},
   {path: 'video-list', component:  VideoListComponent},
+  {path: 'tvshow-list', component:  TVShowListComponent},
 
 
 
@@ -124,6 +126,7 @@ const routes: Routes = [
     ComputerHardwareListComponent,
     MobileAppListComponent,
     VideoListComponent,
+    TVShowListComponent,
   ],
 
   providers: [
