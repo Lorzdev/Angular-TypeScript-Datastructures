@@ -1,0 +1,13 @@
+<div class="lecture-container">
+  <p>Lecture List works!</p>
+
+  <input type="text" [(ngModel)]="lectureName" placeholder="Enter lecture title" />
+  <button (click)="addLecture()">Add Lecture</button>
+
+  <ul>
+    <li *ngFor="let lecture of lectureList">
+      {{ lecture }}
+      <button (click)="removeLecture(lecture)">Remove</button>
+    </li>
+  </ul>
+</div>
