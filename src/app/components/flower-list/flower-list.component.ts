@@ -7,7 +7,13 @@ import { Component } from '@angular/core';
 })
 export class FlowerListComponent {
   flowerName: string = '';
-  flowerList: string[] = [];
+
+  flowerList: string[] = [
+    'Rose',
+    'Tulip',
+    'Sunflower',
+    'Daisy',
+  ];
 
   addFlower() {
     if (this.flowerName.trim()) {

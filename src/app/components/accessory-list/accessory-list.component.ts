@@ -8,12 +8,24 @@ import { Component } from '@angular/core';
 })
 export class AccessoryListComponent {
   accessoryName: string = '';
-  accessoryList: string[] = [];
+
+
+  accessoryList: string[] = [
+    'Sunglasses',
+    'Charger',
+    'Earphones',
+    'Watch',
+    'Bracelet',
+
+
+  ];
 
   addAccessory() {
     if (this.accessoryName.trim()) {
       this.accessoryList.push(this.accessoryName.trim());
       this.accessoryName = '';
+    } else {
+      console.log('Please enter an accessory name.');
     }
   }
 

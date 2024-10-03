@@ -6,14 +6,20 @@ import { Component } from '@angular/core';
   styleUrl: './tool-list.component.css'
 })
 export class ToolListComponent {
-
   toolName: string = '';
-  toolList: string[] = [];
+
+  // Initialize toolList with predefined tools
+  toolList: string[] = [
+    'Hammer',
+    'Screwdriver',
+    'Wrench',
+    'Level'
+  ];
 
   addTool() {
     if (this.toolName.trim()) {
       this.toolList.push(this.toolName.trim());
-      this.toolName = '';
+      this.toolName = ''; // Clear the input field
     } else {
       console.log('Please enter a tool name.');
     }

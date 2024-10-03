@@ -7,14 +7,21 @@ import { Component } from '@angular/core';
 })
 export class PresentationListComponent {
   topic: string = '';
-  presentationList: string[] = [];
+
+  presentationList: string[] = [
+    'Introduction to Angular',
+    'Introduction to Firebase',
+    'Understanding TypeScript',
+    'Web Development Best Practices',
+
+  ];
 
   addTopic() {
     if (this.topic.trim()) {
       this.presentationList.push(this.topic.trim());
-
-
       this.topic = '';
+    } else {
+      console.log('Please enter a topic.');
     }
   }
 

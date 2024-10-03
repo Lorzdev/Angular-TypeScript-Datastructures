@@ -7,12 +7,21 @@ import { Component } from '@angular/core';
 })
 export class BuildingListComponent {
   buildingName: string = '';
-  buildingList: string[] = [];
+
+  // Predefined list of buildings
+  buildingList: string[] = [
+    'Library',
+    'Science Lab',
+    'Computer Lab',
+    'Sports Complex'
+  ];
 
   addBuilding() {
     if (this.buildingName.trim()) {
       this.buildingList.push(this.buildingName.trim());
       this.buildingName = '';
+    } else {
+      console.log('Please enter a building name.');
     }
   }
 

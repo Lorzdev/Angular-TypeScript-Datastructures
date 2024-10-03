@@ -6,14 +6,20 @@ import { Component } from '@angular/core';
   styleUrl: './animal-list.component.css'
 })
 export class AnimalListComponent {
-
   animalName: string = '';
-  animalList: string[] = [];
+
+
+  animalList: string[] = [
+    'Lion',
+    'Tiger',
+    'Elephant',
+    'Giraffe',
+  ];
 
   addAnimal() {
     if (this.animalName.trim()) {
       this.animalList.push(this.animalName.trim());
-      this.animalName = '';
+      this.animalName = ''; // Clear the input field
     } else {
       console.log('Please enter an animal name.');
     }
@@ -26,3 +32,4 @@ export class AnimalListComponent {
     }
   }
 }
+

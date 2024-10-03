@@ -7,9 +7,14 @@ import { Component } from '@angular/core';
   styleUrl: './game-list.component.css'
 })
 export class GameListComponent {
-
   gameName: string = '';
-  gameList: string[] = [];
+
+  gameList: string[] = [
+    'Apex Legends',
+    'Call of Duty',
+    'League of Legends',
+    'Mobile Legends'
+  ];
 
   addGame() {
     if (this.gameName.trim()) {
@@ -27,4 +32,5 @@ export class GameListComponent {
     }
   }
 }
+
 

@@ -7,10 +7,16 @@ import { Component } from '@angular/core';
 })
 
 export class ProductListComponent {
-
   productName: string = '';
   productPrice: number | null = null;
-  productList: { name: string; price: number }[] = [];
+
+  productList: { name: string; price: number }[] = [
+    { name: 'Laptop', price: 1200 },
+    { name: 'Smartphone', price: 800 },
+    { name: 'Headphones', price: 200 },
+    { name: 'Tablet', price: 500 },
+    { name: 'Smartwatch', price: 250 }
+  ];
 
   addProduct() {
     if (this.productName.trim() && this.productPrice !== null && this.productPrice > 0) {
@@ -22,6 +28,7 @@ export class ProductListComponent {
       this.productName = '';
       this.productPrice = null;
     } else {
+      console.log('Please fill out all fields correctly.');
     }
   }
 

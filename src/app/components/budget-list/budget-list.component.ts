@@ -8,7 +8,14 @@ import { Component } from '@angular/core';
 export class BudgetListComponent {
   itemName: string = '';
   itemAmount: number | null = null;
-  budgetList: { name: string; amount: number }[] = [];
+
+
+  budgetList: { name: string; amount: number }[] = [
+    { name: 'Groceries', amount: 200 },
+    { name: 'Utilities', amount: 150 },
+    { name: 'Rent', amount: 1200 },
+    { name: 'Transportation', amount: 100 },
+  ];
 
   addBudgetItem() {
     if (this.itemName.trim() && this.itemAmount !== null) {
@@ -20,6 +27,8 @@ export class BudgetListComponent {
 
       this.itemName = '';
       this.itemAmount = null;
+    } else {
+      console.log('Please enter both item name and amount.');
     }
   }
 

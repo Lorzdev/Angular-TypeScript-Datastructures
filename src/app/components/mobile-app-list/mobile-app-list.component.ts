@@ -7,8 +7,14 @@ import { Component } from '@angular/core';
 })
 export class MobileAppListComponent {
   appName: string = '';
-  appList: string[] = [];
 
+  appList: string[] = [
+    'Facebook',
+    'Instagram',
+    'Spotify',
+    'YouTube',
+    'TikTok',
+  ];
 
   addApp() {
     if (this.appName.trim()) {
@@ -18,7 +24,6 @@ export class MobileAppListComponent {
       console.log('Please enter an app name.');
     }
   }
-
 
   removeApp(app: string) {
     const index = this.appList.indexOf(app);

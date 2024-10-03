@@ -8,12 +8,20 @@ import { Component } from '@angular/core';
 
 export class ComposerListComponent {
   composerName: string = '';
-  composerList: string[] = [];
+
+  composerList: string[] = [
+    'Skusta Clee',
+    'Flow G',
+    'Justine Bieber',
+    'Bruno Mars',
+  ];
 
   addComposer() {
     if (this.composerName.trim()) {
       this.composerList.push(this.composerName.trim());
       this.composerName = '';
+    } else {
+      console.log('Please enter a composer name.');
     }
   }
 

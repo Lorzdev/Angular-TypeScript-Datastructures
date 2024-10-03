@@ -9,12 +9,21 @@ import { Component } from '@angular/core';
 
 export class ExerciseListComponent {
   exerciseName: string = '';
-  exerciseList: string[] = [];
+
+  exerciseList: string[] = [
+    'Push-ups',
+    'Squats',
+    'Jumping Jacks',
+    'Bicep Curls',
+
+  ];
 
   addExercise() {
     if (this.exerciseName.trim()) {
       this.exerciseList.push(this.exerciseName.trim());
       this.exerciseName = '';
+    } else {
+      console.log('Please enter an exercise name.');
     }
   }
 

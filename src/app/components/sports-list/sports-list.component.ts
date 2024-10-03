@@ -6,9 +6,15 @@ import { Component } from '@angular/core';
   styleUrl: './sports-list.component.css'
 })
 export class SportsListComponent {
-
   sportName: string = '';
-  sportsList: string[] = [];
+
+  sportsList: string[] = [
+    'Basketball',
+    'Tennis',
+    'Baseball',
+    'Swimming',
+    'Volleyball'
+  ];
 
   addSport() {
     if (this.sportName.trim()) {

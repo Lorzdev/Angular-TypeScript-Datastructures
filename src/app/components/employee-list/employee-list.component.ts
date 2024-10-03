@@ -7,11 +7,20 @@ import { Component } from '@angular/core';
 })
 
 export class EmployeeListComponent {
-
   name: string = '';
   position: string = '';
   department: string = '';
-  employeeList: { name: string, position: string, department: string }[] = [];
+
+  employeeList: { name: string; position: string; department: string }[] = [];
+
+  constructor() {
+    this.employeeList.push({
+      name: 'Lorenz',
+      position: 'Project Manager',
+      department: 'IT'
+
+    });
+  }
 
   addEmployee() {
     if (this.name.trim() && this.position.trim() && this.department.trim()) {
@@ -20,7 +29,9 @@ export class EmployeeListComponent {
         position: this.position.trim(),
         department: this.department.trim()
       };
+
       this.employeeList.push(newEmployee);
+
       this.name = '';
       this.position = '';
       this.department = '';

@@ -6,12 +6,20 @@ import { Component } from '@angular/core';
   styleUrl: './country-list.component.css'
 })
 export class CountryListComponent {
-
   countryName: string = '';
   selectedContinent: string = '';
-  countryList: { name: string; continent: string }[] = [];
 
-  continents: string[] = ['Philippines', 'Indo', 'Malaysia', 'Thailand', 'Japan', 'Cambodia', 'Singapore'];
+
+  countryList: { name: string; continent: string }[] = [
+    { name: 'Philippines', continent: 'Asia' },
+    { name: 'Indonesia', continent: 'Asia' },
+    { name: 'Thailand', continent: 'Asia' },
+    { name: 'Japan', continent: 'Asia' },
+
+  ];
+
+
+  continents: string[] = ['Asia', 'Europe', 'Africa', 'North America', 'South America', 'Australia', 'Antarctica'];
 
   addCountry() {
     if (this.countryName.trim() && this.selectedContinent) {
@@ -23,6 +31,7 @@ export class CountryListComponent {
       this.countryName = '';
       this.selectedContinent = '';
     } else {
+      console.log('Please fill out all fields.');
     }
   }
 

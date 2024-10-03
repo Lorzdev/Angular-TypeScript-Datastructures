@@ -7,7 +7,15 @@ import { Component } from '@angular/core';
 })
 export class CarModelListComponent {
   carModel: string = '';
-  carModelList: { model: string }[] = [];
+
+
+  carModelList: { model: string }[] = [
+    { model: 'Toyota Corolla' },
+    { model: 'Honda Civic' },
+    { model: 'Ford Mustang' },
+    { model: 'Chevrolet Camaro' },
+    { model: 'Tesla Model S' }
+  ];
 
   addCarModel() {
     if (this.carModel.trim()) {

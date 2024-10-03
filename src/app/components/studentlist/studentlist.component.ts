@@ -10,7 +10,13 @@ export class StudentlistComponent {
   name: string = '';
   course: string = '';
   section: string = '';
-  studentList: string[] = [];
+  studentList: string[] = [
+     'Name: Lorenz Camo, Course: BSIT, Section: 4A',
+     'Name: Decio Rodel, Course: BSIT, Section: 4A',
+     'Name: Calda Rodel, Course: BSIT, Section: 4A',
+     'Name: Amador Kaysie, Course: BSIT, Section: 4A',
+
+  ];
 
   addItem() {
     if (this.name.trim() && this.course.trim() && this.section.trim()) {

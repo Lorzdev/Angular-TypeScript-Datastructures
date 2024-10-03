@@ -8,12 +8,18 @@ import { Component } from '@angular/core';
 
 export class ClassroomListComponent {
   studentName: string = '';
-  classroomList: string[] = [];
+
+  classroomList: string[] = [
+    'Camo',
+    'Yuri',
+    'Calubag',
+    'Maitom'
+  ];
 
   addStudent() {
     if (this.studentName.trim()) {
       this.classroomList.push(this.studentName.trim());
-      this.studentName = '';
+      this.studentName = ''; // Clear the input field after adding
     } else {
       console.log('Please enter a student name.');
     }
@@ -22,7 +28,7 @@ export class ClassroomListComponent {
   removeStudent(student: string) {
     const index = this.classroomList.indexOf(student);
     if (index > -1) {
-      this.classroomList.splice(index, 1);
+      this.classroomList.splice(index, 1); // Remove the student from the list
     }
   }
 }

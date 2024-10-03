@@ -7,8 +7,13 @@ import { Component } from '@angular/core';
 })
 export class ComputerHardwareListComponent {
   hardwareItem: string = '';
-  hardwareList: string[] = [];
 
+  hardwareList: string[] = [
+    'Processor',
+    'Motherboard',
+    'Power Supply',
+    'Graphics Card',
+  ];
 
   addHardware() {
     if (this.hardwareItem.trim()) {
@@ -23,6 +28,7 @@ export class ComputerHardwareListComponent {
     const index = this.hardwareList.indexOf(item);
     if (index > -1) {
       this.hardwareList.splice(index, 1);
+    }
   }
 }
-}
+

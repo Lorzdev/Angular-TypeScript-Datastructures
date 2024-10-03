@@ -8,7 +8,14 @@ import { Component } from '@angular/core';
 export class MusicPlaylistListComponent {
   songTitle: string = '';
   artistName: string = '';
-  playlist: { title: string; artist: string }[] = [];
+
+
+  playlist: { title: string; artist: string }[] = [
+    { title: 'Boyfriend', artist: 'ALLMO$ST' },
+    { title: 'Sumugal', artist: 'Hev Abi' },
+    { title: 'When I Was Your Man', artist: 'Bruno Mars' },
+    { title: 'Love Yourself', artist: 'Justine Bieber' }
+  ];
 
   addSong() {
     if (this.songTitle.trim() && this.artistName.trim()) {

@@ -8,7 +8,12 @@ import { Component } from '@angular/core';
 export class FoodMenuListComponent {
   foodItem: string = '';
   foodPrice: string = '';
-  foodMenu: { name: string; price: string }[] = [];
+
+  foodMenu: { name: string; price: string }[] = [
+    { name: 'Burger', price: '5.99' },
+    { name: 'Pizza', price: '10.99' },
+    { name: 'Pasta', price: '7.50' }
+  ];
 
   addFoodItem() {
     if (this.foodItem.trim() && this.foodPrice.trim()) {

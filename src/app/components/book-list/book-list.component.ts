@@ -6,10 +6,17 @@ import { Component } from '@angular/core';
   styleUrl: './book-list.component.css'
 })
 export class BookListComponent {
-
   bookTitle: string = '';
   authorName: string = '';
-  bookList: { title: string; author: string }[] = [];
+
+
+  bookList: { title: string; author: string }[] = [
+    { title: 'To Kill a Mockingbird', author: 'Harper Lee' },
+    { title: '1984', author: 'George Orwell' },
+    { title: 'The Great Gatsby', author: 'F. Scott Fitzgerald' },
+    { title: 'Pride and Prejudice', author: 'Jane Austen' },
+    { title: 'Moby Dick', author: 'Herman Melville' }
+  ];
 
   addBook() {
     if (this.bookTitle.trim() && this.authorName.trim()) {
@@ -32,3 +39,4 @@ export class BookListComponent {
     }
   }
 }
+

@@ -6,14 +6,19 @@ import { Component } from '@angular/core';
   styleUrl: './language-list.component.css'
 })
 export class LanguageListComponent {
-
   languageName: string = '';
-  languageList: string[] = [];
+
+  languageList: string[] = [
+    'JavaScript',
+    'Python',
+    'Java',
+    'TypeScript',
+  ];
 
   addLanguage() {
     if (this.languageName.trim()) {
       this.languageList.push(this.languageName.trim());
-      this.languageName = '';
+      this.languageName = ''; // Clear the input field
     } else {
       console.log('Please enter a language name.');
     }

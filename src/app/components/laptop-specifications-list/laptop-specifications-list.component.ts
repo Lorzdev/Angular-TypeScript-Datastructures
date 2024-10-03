@@ -7,7 +7,12 @@ import { Component } from '@angular/core';
 })
 export class LaptopSpecificationsListComponent {
   laptopSpecification: string = '';
-  specificationsList: string[] = [];
+
+  specificationsList: string[] = [
+    'Lenovo ThinkPad X1 Carbon: Intel Core i7, 16GB RAM, 1TB SSD',
+    'NVIDIA GeForce GTX 1650',
+    'MacBook Air: Apple M1, 8GB RAM, 256GB SSD'
+  ];
 
   addSpecification() {
     if (this.laptopSpecification.trim()) {
@@ -22,6 +27,6 @@ export class LaptopSpecificationsListComponent {
     const index = this.specificationsList.indexOf(spec);
     if (index > -1) {
       this.specificationsList.splice(index, 1);
+    }
   }
-}
 }

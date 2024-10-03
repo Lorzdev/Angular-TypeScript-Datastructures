@@ -7,12 +7,18 @@ import { Component } from '@angular/core';
 })
 export class DestinationListComponent {
   destinationName: string = '';
-  destinationList: string[] = [];
+
+  destinationList: string[] = [
+    'Siargao',
+    'Boracay',
+    'Tokyo Japan',
+    'Cebu '
+  ];
 
   addDestination() {
     if (this.destinationName.trim()) {
       this.destinationList.push(this.destinationName.trim());
-      this.destinationName = '';
+      this.destinationName = ''; // Clear the input field after adding
     } else {
       console.log('Please enter a destination name.');
     }
@@ -21,7 +27,7 @@ export class DestinationListComponent {
   removeDestination(destination: string) {
     const index = this.destinationList.indexOf(destination);
     if (index > -1) {
-      this.destinationList.splice(index, 1);
+      this.destinationList.splice(index, 1); // Remove the destination from the list
     }
   }
 }

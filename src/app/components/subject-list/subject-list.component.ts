@@ -7,9 +7,16 @@ import { Component } from '@angular/core';
 })
 
 export class SubjectListComponent {
-
   subjectName: string = '';
-  subjectList: string[] = [];
+
+
+  subjectList: string[] = [
+    'INFORMATION ASSURANCE AND SECURITY',
+    'SYSTEM ADMINISTRATION AND MAINTENANCE',
+    'SYSTEM INTEGRATION AND ARCHITECTURE',
+    'NETWORKING 1',
+    'CAPSTONE PROJECT 1'
+  ];
 
   addSubject() {
     if (this.subjectName.trim()) {

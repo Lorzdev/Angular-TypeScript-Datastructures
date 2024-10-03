@@ -6,9 +6,16 @@ import { Component } from '@angular/core';
   styleUrl: './city-list.component.css'
 })
 export class CityListComponent {
-
   cityName: string = '';
-  cityList: string[] = [];
+
+
+  cityList: string[] = [
+    'Caloocan City',
+    'Quezon City',
+    'Pasig City',
+    'Makati City',
+    'Naga City'
+  ];
 
   addCity() {
     if (this.cityName.trim()) {

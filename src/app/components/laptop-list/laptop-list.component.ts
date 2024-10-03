@@ -7,7 +7,15 @@ import { Component } from '@angular/core';
 })
 export class LaptopListComponent {
   laptopModel: string = '';
-  laptopList: string[] = [];
+
+
+  laptopList: string[] = [
+    'Dell XPS 13',
+    'Apple MacBook Air',
+    'HP Spectre x360',
+    'Lenovo ThinkPad X1 Carbon',
+    'Asus ZenBook 14'
+  ];
 
   addLaptop() {
     if (this.laptopModel.trim()) {

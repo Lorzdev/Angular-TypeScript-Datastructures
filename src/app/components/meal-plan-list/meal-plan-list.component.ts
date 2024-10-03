@@ -7,12 +7,20 @@ import { Component } from '@angular/core';
 })
 export class MealPlanListComponent {
   mealName: string = '';
-  mealList: string[] = [];
+
+  mealList: string[] = [
+    'Breakfast: Oatmeal with Fruits',
+    'Lunch: Grilled Chicken Salad',
+    'Dinner: Spaghetti Bolognese',
+    'Snack: Greek Yogurt with Honey',
+  ];
 
   addMeal() {
     if (this.mealName.trim()) {
       this.mealList.push(this.mealName.trim());
       this.mealName = '';
+    } else {
+      console.log('Please enter a meal name.');
     }
   }
 

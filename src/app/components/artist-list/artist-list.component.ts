@@ -8,12 +8,20 @@ import { Component } from '@angular/core';
 
 export class ArtistListComponent {
   artistName: string = '';
-  artistList: string[] = [];
+
+  artistList: string[] = [
+    'Vincent van Gogh',
+    'Georgia O’Keeffe',
+    'Jackson Pollock',
+    'Henri Matisse'
+  ];
 
   addArtist() {
     if (this.artistName.trim()) {
       this.artistList.push(this.artistName.trim());
       this.artistName = '';
+    } else {
+      console.log('Please enter an artist name.');
     }
   }
 

@@ -7,9 +7,16 @@ import { Component } from '@angular/core';
 })
 
 export class CourseListComponent {
-
   courseName: string = '';
-  courseList: { name: string }[] = [];
+
+  courseList: { name: string }[] = [
+    { name: 'BSHM' },
+    { name: 'BSIT' },
+    { name: 'BSIS' },
+    { name: 'BSBA' },
+    { name: 'BSED' },
+  ];
+
   addCourse() {
     if (this.courseName.trim()) {
       const newCourse = {
@@ -22,8 +29,7 @@ export class CourseListComponent {
     }
   }
 
-
-removeCourse(index: number) {
-  this.courseList.splice(index, 1);
-}
+  removeCourse(index: number) {
+    this.courseList.splice(index, 1);
+  }
 }

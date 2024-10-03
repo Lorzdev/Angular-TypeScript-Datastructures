@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 
 export class GroceryListComponent {
   groceryItem: string = '';
-  groceryList: string[] = [];
+  groceryList: string[] = ['Milk', 'Bread', 'Eggs', 'Cheese'];
 
   addGroceryItem() {
     if (this.groceryItem.trim()) {

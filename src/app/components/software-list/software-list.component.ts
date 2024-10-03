@@ -6,14 +6,19 @@ import { Component } from '@angular/core';
   styleUrl: './software-list.component.css'
 })
 export class SoftwareListComponent {
-
   softwareName: string = '';
-  softwareList: string[] = [];
+
+  softwareList: string[] = [
+    'Adobe Photoshop',
+    'Google Chrome',
+    'Visual Studio Code',
+    'Zoom',
+  ];
 
   addSoftware() {
     if (this.softwareName.trim()) {
       this.softwareList.push(this.softwareName.trim());
-      this.softwareName = '';
+      this.softwareName = ''; // Clear the input field
     } else {
       console.log('Please enter a software name.');
     }
@@ -26,4 +31,3 @@ export class SoftwareListComponent {
     }
   }
 }
-

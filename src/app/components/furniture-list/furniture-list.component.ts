@@ -7,12 +7,21 @@ import { Component } from '@angular/core';
 })
 export class FurnitureListComponent {
   furnitureName: string = '';
-  furnitureList: string[] = [];
+
+
+  furnitureList: string[] = [
+    'Recliner',
+    'Wardrobe',
+    'Dining Table',
+    'Coffee Table',
+  ];
 
   addFurniture() {
     if (this.furnitureName.trim()) {
       this.furnitureList.push(this.furnitureName.trim());
       this.furnitureName = '';
+    } else {
+      console.log('Please enter a furniture name.');
     }
   }
 

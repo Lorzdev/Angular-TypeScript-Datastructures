@@ -7,7 +7,13 @@ import { Component } from '@angular/core';
 })
 export class StationeryListComponent {
   stationeryItem: string = '';
-  stationeryList: string[] = [];
+
+  stationeryList: string[] = [
+    'Notebook',
+    'Pencil',
+    'Eraser',
+    'Marker',
+  ];
 
   addStationery() {
     if (this.stationeryItem.trim()) {

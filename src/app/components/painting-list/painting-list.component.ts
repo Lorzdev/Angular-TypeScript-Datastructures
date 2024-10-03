@@ -7,12 +7,20 @@ import { Component } from '@angular/core';
 })
 export class PaintingListComponent {
   paintingName: string = '';
-  paintingList: string[] = [];
+
+  paintingList: string[] = [
+    'Starry Night',
+    'Mona Lisa',
+    'The Persistence of Memory',
+    'The Night Watch',
+
+  ];
 
   addPainting() {
     if (this.paintingName.trim()) {
       this.paintingList.push(this.paintingName.trim());
       this.paintingName = '';
+      console.log('Please enter a painting name.');
     }
   }
 

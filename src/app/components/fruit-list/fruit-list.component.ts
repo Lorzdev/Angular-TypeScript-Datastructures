@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class FruitListComponent {
   fruitName: string = '';
-  fruitList: string[] = [];
+  fruitList: string[] = ['Apple', 'Strawberry', 'Orange', 'Pineapple'];
 
   addFruit() {
     if (this.fruitName) {

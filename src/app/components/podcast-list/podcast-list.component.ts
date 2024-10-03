@@ -7,12 +7,20 @@ import { Component } from '@angular/core';
 })
 export class PodcastListComponent {
   podcastName: string = '';
-  podcastList: string[] = [];
+
+  podcastList: string[] = [
+
+    'Stuff You Should Know',
+    'The Daily',
+    'The Dave Ramsey Show',
+  ];
 
   addPodcast() {
     if (this.podcastName.trim()) {
       this.podcastList.push(this.podcastName.trim());
       this.podcastName = '';
+    } else {
+      console.log('Please enter a podcast name.');
     }
   }
 

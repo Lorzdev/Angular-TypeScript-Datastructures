@@ -6,10 +6,18 @@ import { Component } from '@angular/core';
   styleUrl: './phone-contact-list.component.css'
 })
 export class PhoneContactListComponent {
-
   contactName: string = '';
   contactNumber: string = '';
-  contactList: { name: string; phone: string }[] = [];
+
+  contactList: { name: string; phone: string }[] = [
+    { name: 'Camo Lorenz ', phone: '09196611932' },
+    { name: 'Amador Kaysie', phone: '09096533340' },
+    { name: 'Decio Rodel', phone: '09853440944' },
+    { name: 'Rodel Calda', phone: '09095488500' },
+
+
+
+  ];
 
   addContact() {
     if (this.contactName.trim() && this.contactNumber.trim()) {
