@@ -1,0 +1,13 @@
+<div class="event-list-container">
+  <p>Event List works!</p>
+
+  <input type="text" [(ngModel)]="newEvent" placeholder="Enter event name" />
+  <button (click)="addEvent()">Add Event</button>
+
+  <ul>
+    <li *ngFor="let event of eventList">
+      {{ event }}
+      <button (click)="removeEvent(event)">Remove</button>
+    </li>
+  </ul>
+</div>
