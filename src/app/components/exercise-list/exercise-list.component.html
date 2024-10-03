@@ -1,0 +1,13 @@
+<div class="exercise-container">
+  <p>Exercise List works!</p>
+
+  <input type="text" [(ngModel)]="exerciseName" placeholder="Enter exercise name" />
+  <button (click)="addExercise()">Add Exercise</button>
+
+  <ul>
+    <li *ngFor="let exercise of exerciseList">
+      {{ exercise }}
+      <button (click)="removeExercise(exercise)">Remove</button>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,90 @@
+.exercise-container{
+  border: 2px solid #310cae;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  max-width: 400px;
+  margin: 20px auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+h2 {
+  text-align: center;
+  color: #4CAF50;
+}
+
+
+input {
+  border: 2px solid #2196F3;
+  padding: 10px;
+  margin-right: 10px;
+  border-radius: 4px;
+  width: calc(70% - 12px);
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+
+button {
+  background-color: #218536;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+}
+
+
+button:hover {
+  background-color: #1976D2;
+}
+
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+
+li {
+  background-color: #E8F5E9;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #4CAF50;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+
+li:hover {
+  transform: scale(1.02);
+}
+
+
+li button {
+  background-color: #F44336;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+li button {
+  margin-left: 20px;
+  background-color: #ae1818;
+}
+
+li button:hover {
+  background-color: #1bcc38;
+}
+
