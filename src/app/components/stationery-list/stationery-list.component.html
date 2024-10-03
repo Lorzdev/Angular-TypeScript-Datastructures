@@ -1,0 +1,13 @@
+<div class="stationery-container">
+  <p>Stationery List</p>
+
+  <input type="text" [(ngModel)]="stationeryItem" placeholder="Enter stationery item" />
+  <button (click)="addStationery()">Add Item</button>
+
+  <ul>
+    <li *ngFor="let item of stationeryList">
+      {{ item }}
+      <button (click)="removeStationery(item)">Remove</button>
+    </li>
+  </ul>
+</div>
