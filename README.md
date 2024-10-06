@@ -16,6 +16,8 @@ Make sure you commit each feature implementation to your GitHub repository. Ensu
 
 Upload it on Firebase hosting.
 
+https://camo-typescript-angular.web.app/
+
 ### Documentation
 
 Document your activity on Hashnode.com. Include the GitHub repository and the web URL from Firebase hosting.
