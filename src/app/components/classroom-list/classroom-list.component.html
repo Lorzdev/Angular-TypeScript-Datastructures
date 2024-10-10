@@ -1,14 +1,16 @@
 <div class="classroom-container">
-  <p>Classroom List works!</p>
+  <p>Classroom List </p>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search student name..." (input)="searchClassroomList()" />
   <input type="text" [(ngModel)]="studentName" placeholder="Enter student name" />
+
   <button (click)="addStudent()">Add Student</button>
+  <button (click)="clearAll()">Clear All</button>
 
   <ul>
-    <li *ngFor="let student of classroomList">
+    <li *ngFor="let student of filteredClassroomList">
       {{ student }}
       <button (click)="removeStudent(student)">Remove</button>
     </li>
   </ul>
 </div>
-

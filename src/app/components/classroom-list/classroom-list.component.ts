@@ -1,34 +1,52 @@
 import { Component } from '@angular/core';
+import {ClassroomService} from "../../services/classroom-list.service";
 
 @Component({
   selector: 'app-classroom-list',
   templateUrl: './classroom-list.component.html',
   styleUrl: './classroom-list.component.css'
 })
-
 export class ClassroomListComponent {
   studentName: string = '';
+  searchTerm: string = '';
 
-  classroomList: string[] = [
-    'Camo',
-    'Yuri',
-    'Calubag',
-    'Maitom'
-  ];
+  classroomList: string[] = [];
+  filteredClassroomList: string[] = [];
+
+  constructor(private classroomService: ClassroomService) {
+    this.classroomList = this.classroomService.getClassroomList();
+    this.filteredClassroomList = [...this.classroomList];
+  }
 
   addStudent() {
     if (this.studentName.trim()) {
-      this.classroomList.push(this.studentName.trim());
-      this.studentName = ''; // Clear the input field after adding
+      this.classroomService.addStudent(this.studentName.trim());
+      this.updateClassroomList();
+      this.studentName = '';
     } else {
       console.log('Please enter a student name.');
     }
   }
 
   removeStudent(student: string) {
-    const index = this.classroomList.indexOf(student);
-    if (index > -1) {
-      this.classroomList.splice(index, 1); // Remove the student from the list
-    }
+    this.classroomService.removeStudent(student);
+    this.updateClassroomList();
+  }
+
+  clearAll() {
+    this.classroomService.clearAllStudents();
+    this.updateClassroomList();
+  }
+
+  searchClassroomList() {
+    const searchLower = this.searchTerm.toLowerCase();
+    this.filteredClassroomList = this.classroomList.filter(student =>
+      student.toLowerCase().includes(searchLower)
+    );
+  }
+
+  updateClassroomList() {
+    this.classroomList = this.classroomService.getClassroomList();
+    this.searchClassroomList();
   }
 }
