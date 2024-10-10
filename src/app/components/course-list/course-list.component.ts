@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {CourseService} from "../../services/course-list.service";
 
 @Component({
   selector: 'app-course-list',
@@ -8,28 +9,45 @@ import { Component } from '@angular/core';
 
 export class CourseListComponent {
   courseName: string = '';
+  searchTerm: string = '';
+  courseList: { name: string }[] = [];
+  filteredCourseList: { name: string }[] = [];
 
-  courseList: { name: string }[] = [
-    { name: 'BSHM' },
-    { name: 'BSIT' },
-    { name: 'BSIS' },
-    { name: 'BSBA' },
-    { name: 'BSED' },
-  ];
+  constructor(private courseService: CourseService) {
+    this.courseList = this.courseService.getCourses();
+    this.filteredCourseList = [...this.courseList];
+  }
 
   addCourse() {
     if (this.courseName.trim()) {
-      const newCourse = {
-        name: this.courseName.trim(),
-      };
-      this.courseList.push(newCourse);
+      const newCourse = { name: this.courseName.trim() };
+      this.courseService.addCourse(newCourse);
+      this.updateCourseLists();
       this.courseName = '';
     } else {
-      console.log('Please fill out all fields.');
+      console.log('Please enter a course name.');
     }
   }
 
   removeCourse(index: number) {
-    this.courseList.splice(index, 1);
+    this.courseService.removeCourse(index);
+    this.updateCourseLists();
+  }
+
+  clearAll() {
+    this.courseService.clearAllCourses();
+    this.updateCourseLists();
+  }
+
+  searchCourses() {
+    const searchLower = this.searchTerm.toLowerCase();
+    this.filteredCourseList = this.courseList.filter(course =>
+      course.name.toLowerCase().includes(searchLower)
+    );
+  }
+
+  updateCourseLists() {
+    this.courseList = this.courseService.getCourses();
+    this.searchCourses();
   }
 }

@@ -1,18 +1,21 @@
 <div class="course-list-container">
-  <p>Course List works!</p>
+  <p>Course List </p>
 
+  <!-- Search Input -->
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search courses..." (input)="searchCourses()" />
+
+  <!-- Add Course Input -->
   <div class="add-course">
     <input [(ngModel)]="courseName" placeholder="Enter course name" />
     <button (click)="addCourse()">Add Course</button>
+    <button (click)="clearAll()">Clear All</button> <!-- Clear all courses -->
   </div>
 
+  <!-- Course List -->
   <ul>
-    <li *ngFor="let course of courseList; let i = index">
+    <li *ngFor="let course of filteredCourseList; let i = index">
       {{ course.name }}
       <button (click)="removeCourse(i)">Remove</button>
     </li>
   </ul>
-
 </div>
-
-
