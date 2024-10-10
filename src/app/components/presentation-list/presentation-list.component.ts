@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {PresentationService} from "../../services/presentation-list.service";
 
 @Component({
   selector: 'app-presentation-list',
@@ -7,18 +8,17 @@ import { Component } from '@angular/core';
 })
 export class PresentationListComponent {
   topic: string = '';
+  searchTerm: string = '';
 
-  presentationList: string[] = [
-    'Introduction to Angular',
-    'Introduction to Firebase',
-    'Understanding TypeScript',
-    'Web Development Best Practices',
+  constructor(private presentationService: PresentationService) {}
 
-  ];
+  get presentationList() {
+    return this.presentationService.getPresentationList();
+  }
 
   addTopic() {
     if (this.topic.trim()) {
-      this.presentationList.push(this.topic.trim());
+      this.presentationService.addTopic(this.topic.trim());
       this.topic = '';
     } else {
       console.log('Please enter a topic.');
@@ -26,9 +26,14 @@ export class PresentationListComponent {
   }
 
   removeTopic(topic: string) {
-    const index = this.presentationList.indexOf(topic);
-    if (index > -1) {
-      this.presentationList.splice(index, 1);
-    }
+    this.presentationService.removeTopic(topic);
+  }
+
+  clearAll() {
+    this.presentationService.clearAll();
+  }
+
+  filteredPresentationList() {
+    return this.presentationService.searchPresentation(this.searchTerm);
   }
 }
