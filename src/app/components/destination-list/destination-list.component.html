@@ -1,11 +1,15 @@
 <div class="destination-container">
-  <p>Destination List works!</p>
+  <p>Destination List </p>
 
   <input type="text" [(ngModel)]="destinationName" placeholder="Enter destination name" />
   <button (click)="addDestination()">Add Destination</button>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search destinations..." />
+
+  <button (click)="clearAll()">Clear All</button>
+
   <ul>
-    <li *ngFor="let destination of destinationList">
+    <li *ngFor="let destination of filteredDestinations()">
       {{ destination }}
       <button (click)="removeDestination(destination)">Remove</button>
     </li>

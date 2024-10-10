@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {DestinationService} from "../../services/destination-list.service";
 
 @Component({
   selector: 'app-destination-list',
@@ -7,27 +8,28 @@ import { Component } from '@angular/core';
 })
 export class DestinationListComponent {
   destinationName: string = '';
+  searchTerm: string = '';
 
-  destinationList: string[] = [
-    'Siargao',
-    'Boracay',
-    'Tokyo Japan',
-    'Cebu '
-  ];
+  constructor(private destinationService: DestinationService) {}
+
+  get destinationList() {
+    return this.destinationService.getDestinationList();
+  }
 
   addDestination() {
-    if (this.destinationName.trim()) {
-      this.destinationList.push(this.destinationName.trim());
-      this.destinationName = ''; // Clear the input field after adding
-    } else {
-      console.log('Please enter a destination name.');
-    }
+    this.destinationService.addDestination(this.destinationName);
+    this.destinationName = '';
   }
 
   removeDestination(destination: string) {
-    const index = this.destinationList.indexOf(destination);
-    if (index > -1) {
-      this.destinationList.splice(index, 1); // Remove the destination from the list
-    }
+    this.destinationService.removeDestination(destination);
+  }
+
+  clearAll() {
+    this.destinationService.clearAll();
+  }
+
+  filteredDestinations() {
+    return this.destinationService.searchDestinations(this.searchTerm);
   }
 }
