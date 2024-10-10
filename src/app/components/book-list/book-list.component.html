@@ -1,13 +1,19 @@
 <div class="book-list-container">
-  <p>Book List works!</p>
+  <p>Book List </p>
 
+  <!-- Search Input -->
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search books..." (input)="searchBooks()" />
+
+  <!-- Add Book Input -->
   <input type="text" [(ngModel)]="bookTitle" placeholder="Enter book title" />
   <input type="text" [(ngModel)]="authorName" placeholder="Enter author name" />
 
   <button (click)="addBook()">Add Book</button>
+  <button (click)="clearAll()">Clear All</button> <!-- Clear all books -->
 
+  <!-- Book List -->
   <ul>
-    <li *ngFor="let book of bookList">
+    <li *ngFor="let book of filteredBookList">
       {{ book.title }} by {{ book.author }}
       <button (click)="removeBook(book)">Remove</button>
     </li>
