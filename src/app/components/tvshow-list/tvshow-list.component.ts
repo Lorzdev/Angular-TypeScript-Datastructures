@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {TVShowService} from "../../services/tvshow-list.service";
 
 @Component({
   selector: 'app-tvshow-list',
@@ -7,27 +8,28 @@ import { Component } from '@angular/core';
 })
 export class TVShowListComponent {
   showName: string = '';
+  searchTerm: string = '';
 
-  showList: string[] = [
-    'Breaking Bad',
-    'Stranger Things',
-    'The Crown',
-    'Game of Thrones',
-  ];
+  constructor(private tvShowService: TVShowService) {}
+
+  get showList() {
+    return this.tvShowService.getShowList();
+  }
 
   addShow() {
-    if (this.showName.trim()) {
-      this.showList.push(this.showName.trim());
-      this.showName = '';
-    } else {
-      console.log('Please enter a show name.');
-    }
+    this.tvShowService.addShow(this.showName);
+    this.showName = '';
   }
 
   removeShow(show: string) {
-    const index = this.showList.indexOf(show);
-    if (index > -1) {
-      this.showList.splice(index, 1); 
-    }
+    this.tvShowService.removeShow(show);
+  }
+
+  clearAll() {
+    this.tvShowService.clearAll();
+  }
+
+  filteredShows() {
+    return this.tvShowService.searchShow(this.searchTerm);
   }
 }

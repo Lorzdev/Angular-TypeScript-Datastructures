@@ -1,11 +1,14 @@
 <div class="tv-show-container">
-  <p>TV Show List works!</p>
+  <p>TV Show List </p>
 
   <input type="text" [(ngModel)]="showName" placeholder="Enter TV show name" />
   <button (click)="addShow()">Add Show</button>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search TV shows..." />
+  <button (click)="clearAll()">Clear All</button>
+
   <ul>
-    <li *ngFor="let show of showList">
+    <li *ngFor="let show of filteredShows()">
       {{ show }}
       <button (click)="removeShow(show)">Remove</button>
     </li>
