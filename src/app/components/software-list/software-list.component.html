@@ -1,12 +1,14 @@
 <div class="software-list-container">
-  <p>Software List works!</p>
+  <p>Software List</p>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search software..." (input)="searchSoftware()" />
   <input type="text" [(ngModel)]="softwareName" placeholder="Enter software name" />
 
   <button (click)="addSoftware()">Add Software</button>
+  <button (click)="clearAll()">Clear All</button>
 
   <ul>
-    <li *ngFor="let software of softwareList">
+    <li *ngFor="let software of filteredSoftwareList">
       {{ software }}
       <button (click)="removeSoftware(software)">Remove</button>
     </li>
