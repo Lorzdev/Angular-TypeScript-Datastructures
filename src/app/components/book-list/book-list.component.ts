@@ -10,7 +10,7 @@ import {BookService} from "../../services/book-list.service";
 export class BookListComponent {
   bookTitle: string = '';
   authorName: string = '';
-  searchTerm: string = '';  // For search input
+  searchTerm: string = '';
   bookList: { title: string; author: string }[] = [];
   filteredBookList: { title: string; author: string }[] = [];
 

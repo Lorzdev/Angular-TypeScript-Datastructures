@@ -1,12 +1,17 @@
 <div class="city-list-container">
-  <p>City List works!</p>
+  <p>City List</p>
 
+  <!-- Search Input -->
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search cities..." (input)="searchCities()" />
+
+  <!-- Add City Input -->
   <input type="text" [(ngModel)]="cityName" placeholder="Enter city name" />
-
   <button (click)="addCity()">Add City</button>
+  <button (click)="clearAll()">Clear All</button> <!-- Clear all cities -->
 
+  <!-- City List -->
   <ul>
-    <li *ngFor="let city of cityList">
+    <li *ngFor="let city of filteredCityList">
       {{ city }}
       <button (click)="removeCity(city)">Remove</button>
     </li>
