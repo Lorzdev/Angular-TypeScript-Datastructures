@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {EventService} from "../../services/event-list.service";
 
 @Component({
   selector: 'app-event-list',
@@ -7,24 +8,32 @@ import { Component } from '@angular/core';
 })
 export class EventListComponent {
   newEvent: string = '';
-  eventList: string[] = [
-    'Science Fair - October 10, 2024',
-    'Sports Day - October 20, 2024',
-    'Annual School Play - November 10, 2024',
+  searchTerm: string = '';
 
-  ];
+  constructor(private eventService: EventService) {}
+
+  get eventList() {
+    return this.eventService.getEventList();
+  }
 
   addEvent() {
     if (this.newEvent.trim()) {
-      this.eventList.push(this.newEvent.trim());
+      this.eventService.addEvent(this.newEvent.trim());
       this.newEvent = ''; // Clear the input field
+    } else {
+      console.log('Please enter an event name.');
     }
   }
 
   removeEvent(event: string) {
-    const index = this.eventList.indexOf(event);
-    if (index > -1) {
-      this.eventList.splice(index, 1);
+    this.eventService.removeEvent(event);
   }
-}
+
+  clearAll() {
+    this.eventService.clearAll();
+  }
+
+  filteredEventList() {
+    return this.eventService.searchEvents(this.searchTerm);
+  }
 }
