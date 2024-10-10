@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {SpecificationsService} from "../../services/laptop-specifications-list.service";
 
 @Component({
   selector: 'app-laptop-specifications-list',
@@ -7,26 +8,28 @@ import { Component } from '@angular/core';
 })
 export class LaptopSpecificationsListComponent {
   laptopSpecification: string = '';
+  searchTerm: string = '';
 
-  specificationsList: string[] = [
-    'Lenovo ThinkPad X1 Carbon: Intel Core i7, 16GB RAM, 1TB SSD',
-    'NVIDIA GeForce GTX 1650',
-    'MacBook Air: Apple M1, 8GB RAM, 256GB SSD'
-  ];
+  constructor(private specificationsService: SpecificationsService) {}
+
+  get specificationsList() {
+    return this.specificationsService.getSpecificationsList();
+  }
 
   addSpecification() {
-    if (this.laptopSpecification.trim()) {
-      this.specificationsList.push(this.laptopSpecification.trim());
-      this.laptopSpecification = '';
-    } else {
-      console.log('Please enter a laptop specification.');
-    }
+    this.specificationsService.addSpecification(this.laptopSpecification);
+    this.laptopSpecification = '';
   }
 
   removeSpecification(spec: string) {
-    const index = this.specificationsList.indexOf(spec);
-    if (index > -1) {
-      this.specificationsList.splice(index, 1);
-    }
+    this.specificationsService.removeSpecification(spec);
+  }
+
+  clearAll() {
+    this.specificationsService.clearAll();
+  }
+
+  filteredSpecifications() {
+    return this.specificationsService.searchSpecifications(this.searchTerm);
   }
 }

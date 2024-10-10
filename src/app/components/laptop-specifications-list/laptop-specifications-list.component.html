@@ -1,14 +1,16 @@
 <div class="specifications-container">
-  <p>Laptop Specifications List works!</p>
+  <p>Laptop Specifications </p>
 
   <input type="text" [(ngModel)]="laptopSpecification" placeholder="Enter laptop specification" />
   <button (click)="addSpecification()">Add Specification</button>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search specifications..." />
+  <button (click)="clearAll()">Clear All</button>
+
   <ul>
-    <li *ngFor="let spec of specificationsList">
+    <li *ngFor="let spec of filteredSpecifications()">
       {{ spec }}
       <button (click)="removeSpecification(spec)">Remove</button>
     </li>
   </ul>
 </div>
-

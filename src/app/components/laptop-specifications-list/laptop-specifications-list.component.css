@@ -29,12 +29,12 @@ input {
 button {
   background-color: #218536;
   color: white;
-  padding: 10px 16px;
+  padding: 14px 17px;
   border: none;
-  border-radius: 8px;
+  border-radius: 9px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-left: 10px;
+  margin-left: 6px;
 }
 
 
