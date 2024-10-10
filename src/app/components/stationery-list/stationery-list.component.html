@@ -4,8 +4,12 @@
   <input type="text" [(ngModel)]="stationeryItem" placeholder="Enter stationery item" />
   <button (click)="addStationery()">Add Item</button>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search items " />
+
+  <button (click)="clearAll()">Clear All</button>
+
   <ul>
-    <li *ngFor="let item of stationeryList">
+    <li *ngFor="let item of filteredStationeryList()">
       {{ item }}
       <button (click)="removeStationery(item)">Remove</button>
     </li>

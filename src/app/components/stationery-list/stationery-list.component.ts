@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {StationeryService} from "../../services/stationery-list.service";
 
 @Component({
   selector: 'app-stationery-list',
@@ -7,27 +8,28 @@ import { Component } from '@angular/core';
 })
 export class StationeryListComponent {
   stationeryItem: string = '';
+  searchTerm: string = '';
 
-  stationeryList: string[] = [
-    'Notebook',
-    'Pencil',
-    'Eraser',
-    'Marker',
-  ];
+  constructor(private stationeryService: StationeryService) {}
+
+  get stationeryList() {
+    return this.stationeryService.getStationeryList();
+  }
 
   addStationery() {
-    if (this.stationeryItem.trim()) {
-      this.stationeryList.push(this.stationeryItem.trim());
-      this.stationeryItem = '';
-    } else {
-      console.log('Please enter a stationery item.');
-    }
+    this.stationeryService.addStationery(this.stationeryItem);
+    this.stationeryItem = '';
   }
 
   removeStationery(item: string) {
-    const index = this.stationeryList.indexOf(item);
-    if (index > -1) {
-      this.stationeryList.splice(index, 1);
-    }
+    this.stationeryService.removeStationery(item);
+  }
+
+  clearAll() {
+    this.stationeryService.clearAll(); // Clear all items
+  }
+
+  filteredStationeryList() {
+    return this.stationeryService.searchStationery(this.searchTerm);
   }
 }
