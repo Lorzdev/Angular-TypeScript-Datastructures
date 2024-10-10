@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {MovieService} from "../../services/movie-list.service";
 
 @Component({
   selector: 'app-movie-list',
@@ -8,21 +9,23 @@ import { Component } from '@angular/core';
 export class MovieListComponent {
   movieTitle: string = '';
   directorName: string = '';
+  searchTerm: string = '';
+  movieList: { title: string; director: string }[] = [];
+  filteredMovieList: { title: string; director: string }[] = [];
 
-  movieList: { title: string; director: string }[] = [
-    { title: 'Inception', director: 'Christopher Nolan' },
-    { title: 'The Godfather', director: 'Francis Ford Coppola' },
-    { title: 'Pulp Fiction', director: 'Quentin Tarantino' },
-    { title: 'The Dark Knight', director: 'Christopher Nolan' },
-  ];
+  constructor(private movieService: MovieService) {
+    this.movieList = this.movieService.getMovies();
+    this.filteredMovieList = [...this.movieList];
+  }
 
   addMovie() {
     if (this.movieTitle.trim() && this.directorName.trim()) {
       const newMovie = {
         title: this.movieTitle.trim(),
-        director: this.directorName.trim()
+        director: this.directorName.trim(),
       };
-      this.movieList.push(newMovie);
+      this.movieService.addMovie(newMovie);
+      this.updateMovieLists();
       this.movieTitle = '';
       this.directorName = '';
     } else {
@@ -31,9 +34,25 @@ export class MovieListComponent {
   }
 
   removeMovie(movie: { title: string; director: string }) {
-    const index = this.movieList.indexOf(movie);
-    if (index > -1) {
-      this.movieList.splice(index, 1);
-    }
+    this.movieService.removeMovie(movie);
+    this.updateMovieLists();
+  }
+
+  clearAll() {
+    this.movieService.clearAllMovies();
+    this.updateMovieLists();
+  }
+
+  searchMovies() {
+    const searchLower = this.searchTerm.toLowerCase();
+    this.filteredMovieList = this.movieList.filter(movie =>
+      movie.title.toLowerCase().includes(searchLower) ||
+      movie.director.toLowerCase().includes(searchLower)
+    );
+  }
+
+  updateMovieLists() {
+    this.movieList = this.movieService.getMovies();
+    this.searchMovies();  //
   }
 }

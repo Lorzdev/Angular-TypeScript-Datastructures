@@ -1,13 +1,19 @@
 <div class="movie-list-container">
-  <p>Movie List work!</p>
+  <p>Movie List </p>
 
+  <!-- Search Input -->
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search movies..." (input)="searchMovies()" />
+
+  <!-- Add Movie Input Fields -->
   <input type="text" [(ngModel)]="movieTitle" placeholder="Enter movie title" />
   <input type="text" [(ngModel)]="directorName" placeholder="Enter director name" />
 
   <button (click)="addMovie()">Add Movie</button>
+  <button (click)="clearAll()">Clear All</button> <!-- Clear all movies button -->
 
+  <!-- Movie List -->
   <ul>
-    <li *ngFor="let movie of movieList">
+    <li *ngFor="let movie of filteredMovieList">
       {{ movie.title }} by {{ movie.director }}
       <button (click)="removeMovie(movie)">Remove</button>
     </li>
