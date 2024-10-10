@@ -1,11 +1,14 @@
 <div class="app-container">
-  <p>Mobile App List works!</p>
+  <p>Mobile App List</p>
 
   <input type="text" [(ngModel)]="appName" placeholder="Enter app name" />
   <button (click)="addApp()">Add App</button>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search apps..." />
+  <button (click)="clearAll()">Clear All</button>
+
   <ul>
-    <li *ngFor="let app of appList">
+    <li *ngFor="let app of filteredApps()">
       {{ app }}
       <button (click)="removeApp(app)">Remove</button>
     </li>

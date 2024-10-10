@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {MobileAppService} from "../../services/mobile-app-list.service";
 
 @Component({
   selector: 'app-mobile-app-list',
@@ -7,28 +8,28 @@ import { Component } from '@angular/core';
 })
 export class MobileAppListComponent {
   appName: string = '';
+  searchTerm: string = '';
 
-  appList: string[] = [
-    'Facebook',
-    'Instagram',
-    'Spotify',
-    'YouTube',
-    'TikTok',
-  ];
+  constructor(private mobileAppService: MobileAppService) {}
+
+  get appList() {
+    return this.mobileAppService.getAppList();
+  }
 
   addApp() {
-    if (this.appName.trim()) {
-      this.appList.push(this.appName.trim());
-      this.appName = '';
-    } else {
-      console.log('Please enter an app name.');
-    }
+    this.mobileAppService.addApp(this.appName);
+    this.appName = '';
   }
 
   removeApp(app: string) {
-    const index = this.appList.indexOf(app);
-    if (index > -1) {
-      this.appList.splice(index, 1);
-    }
+    this.mobileAppService.removeApp(app);
+  }
+
+  clearAll() {
+    this.mobileAppService.clearAll();
+  }
+
+  filteredApps() {
+    return this.mobileAppService.searchApp(this.searchTerm);
   }
 }
