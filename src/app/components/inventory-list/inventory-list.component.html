@@ -1,11 +1,14 @@
 <div class="inventory-container">
-  <p>Inventory List works!</p>
+  <p>Inventory List </p>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search inventory..." (input)="searchInventory()" />
   <input type="text" [(ngModel)]="inventoryItem" placeholder="Enter inventory item" />
+
   <button (click)="addInventoryItem()">Add Item</button>
+  <button (click)="clearAll()">Clear All</button>
 
   <ul>
-    <li *ngFor="let item of inventoryList">
+    <li *ngFor="let item of filteredInventoryList">
       {{ item }}
       <button (click)="removeInventoryItem(item)">Remove</button>
     </li>

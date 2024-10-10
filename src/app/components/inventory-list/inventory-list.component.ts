@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {InventoryService} from "../../services/inventory-list.service";
 
 @Component({
   selector: 'app-inventory-list',
@@ -7,28 +8,45 @@ import { Component } from '@angular/core';
 })
 export class InventoryListComponent {
   inventoryItem: string = '';
+  searchTerm: string = '';
 
-  // Predefined list of inventory items
-  inventoryList: string[] = [
-    'Apples',
-    'Bananas',
-    'Milk',
-    'Bread'
-  ];
+  inventoryList: string[] = [];
+  filteredInventoryList: string[] = [];
+
+  constructor(private inventoryService: InventoryService) {
+    this.inventoryList = this.inventoryService.getInventoryList();
+    this.filteredInventoryList = [...this.inventoryList];
+  }
 
   addInventoryItem() {
     if (this.inventoryItem.trim()) {
-      this.inventoryList.push(this.inventoryItem.trim());
-      this.inventoryItem = ''; // Clear the input field after adding
+      this.inventoryService.addInventoryItem(this.inventoryItem.trim());
+      this.updateInventoryList();
+      this.inventoryItem = '';
     } else {
       console.log('Please enter an inventory item.');
     }
   }
 
   removeInventoryItem(item: string) {
-    const index = this.inventoryList.indexOf(item);
-    if (index > -1) {
-      this.inventoryList.splice(index, 1); // Remove the item from the list
-    }
+    this.inventoryService.removeInventoryItem(item);
+    this.updateInventoryList();
+  }
+
+  clearAll() {
+    this.inventoryService.clearAllItems();
+    this.updateInventoryList();
+  }
+
+  searchInventory() {
+    const searchLower = this.searchTerm.toLowerCase();
+    this.filteredInventoryList = this.inventoryList.filter(item =>
+      item.toLowerCase().includes(searchLower)
+    );
+  }
+
+  updateInventoryList() {
+    this.inventoryList = this.inventoryService.getInventoryList();
+    this.searchInventory();
   }
 }
