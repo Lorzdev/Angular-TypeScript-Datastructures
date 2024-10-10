@@ -1,11 +1,14 @@
 <div class="lecture-container">
-  <p>Lecture List works!</p>
+  <p>Lecture List </p>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search lectures..." (input)="searchLecture()" />
   <input type="text" [(ngModel)]="lectureName" placeholder="Enter lecture title" />
+
   <button (click)="addLecture()">Add Lecture</button>
+  <button (click)="clearAll()">Clear All</button>
 
   <ul>
-    <li *ngFor="let lecture of lectureList">
+    <li *ngFor="let lecture of filteredLectureList">
       {{ lecture }}
       <button (click)="removeLecture(lecture)">Remove</button>
     </li>

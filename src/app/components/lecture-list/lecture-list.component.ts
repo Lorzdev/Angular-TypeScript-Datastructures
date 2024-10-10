@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {LectureService} from "../../services/lecture-list.service";
 
 @Component({
   selector: 'app-lecture-list',
@@ -7,19 +8,20 @@ import { Component } from '@angular/core';
 })
 export class LectureListComponent {
   lectureName: string = '';
+  searchTerm: string = '';
 
+  lectureList: string[] = [];
+  filteredLectureList: string[] = [];
 
-  lectureList: string[] = [
-    'Introduction to Programming',
-    'Data Structures and Algorithms',
-    'Web Development Fundamentals',
-    'Database Management Systems',
-    'Software Engineering Principles'
-  ];
+  constructor(private lectureService: LectureService) {
+    this.lectureList = this.lectureService.getLectureList();
+    this.filteredLectureList = [...this.lectureList];
+  }
 
   addLecture() {
     if (this.lectureName.trim()) {
-      this.lectureList.push(this.lectureName.trim());
+      this.lectureService.addLecture(this.lectureName.trim());
+      this.updateLectureList();
       this.lectureName = '';
     } else {
       console.log('Please enter a lecture title.');
@@ -27,9 +29,24 @@ export class LectureListComponent {
   }
 
   removeLecture(lecture: string) {
-    const index = this.lectureList.indexOf(lecture);
-    if (index > -1) {
-      this.lectureList.splice(index, 1);
-    }
+    this.lectureService.removeLecture(lecture);
+    this.updateLectureList();
+  }
+
+  clearAll() {
+    this.lectureService.clearAllLectures();
+    this.updateLectureList();
+  }
+
+  searchLecture() {
+    const searchLower = this.searchTerm.toLowerCase();
+    this.filteredLectureList = this.lectureList.filter(lecture =>
+      lecture.toLowerCase().includes(searchLower)
+    );
+  }
+
+  updateLectureList() {
+    this.lectureList = this.lectureService.getLectureList();
+    this.searchLecture();
   }
 }
