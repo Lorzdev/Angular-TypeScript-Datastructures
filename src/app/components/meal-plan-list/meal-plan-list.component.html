@@ -1,11 +1,14 @@
 <div class="meal-plan-container">
-  <p>MealPlan List works!</p>
+  <p>Meal Plan List </p>
 
   <input type="text" [(ngModel)]="mealName" placeholder="Enter meal name" />
   <button (click)="addMeal()">Add Meal</button>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search meals..." />
+  <button (click)="clearAll()">Clear All</button>
+
   <ul>
-    <li *ngFor="let meal of mealList">
+    <li *ngFor="let meal of filteredMeals()">
       {{ meal }}
       <button (click)="removeMeal(meal)">Remove</button>
     </li>

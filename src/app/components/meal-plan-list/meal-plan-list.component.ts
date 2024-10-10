@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {MealPlanService} from "../../services/meal-plan-list.service";
 
 @Component({
   selector: 'app-meal-plan-list',
@@ -7,27 +8,28 @@ import { Component } from '@angular/core';
 })
 export class MealPlanListComponent {
   mealName: string = '';
+  searchTerm: string = '';
 
-  mealList: string[] = [
-    'Breakfast: Oatmeal with Fruits',
-    'Lunch: Grilled Chicken Salad',
-    'Dinner: Spaghetti Bolognese',
-    'Snack: Greek Yogurt with Honey',
-  ];
+  constructor(private mealPlanService: MealPlanService) {}
+
+  get mealList() {
+    return this.mealPlanService.getMealList();
+  }
 
   addMeal() {
-    if (this.mealName.trim()) {
-      this.mealList.push(this.mealName.trim());
-      this.mealName = '';
-    } else {
-      console.log('Please enter a meal name.');
-    }
+    this.mealPlanService.addMeal(this.mealName);
+    this.mealName = '';
   }
 
   removeMeal(meal: string) {
-    const index = this.mealList.indexOf(meal);
-    if (index > -1) {
-      this.mealList.splice(index, 1);
-    }
+    this.mealPlanService.removeMeal(meal);
+  }
+
+  clearAll() {
+    this.mealPlanService.clearAll();
+  }
+
+  filteredMeals() {
+    return this.mealPlanService.searchMeal(this.searchTerm);
   }
 }
