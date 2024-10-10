@@ -1,16 +1,17 @@
 <div class="playlist-container">
-  <p>Music Playlist works!</p>
+  <p>Music Playlist </p>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search songs..." (input)="searchPlaylist()" />
   <input type="text" [(ngModel)]="songTitle" placeholder="Enter song title" />
   <input type="text" [(ngModel)]="artistName" placeholder="Enter artist name" />
 
   <button (click)="addSong()">Add Song</button>
+  <button (click)="clearAll()">Clear All</button>
 
   <ul>
-    <li *ngFor="let song of playlist">
+    <li *ngFor="let song of filteredPlaylist">
       {{ song.title }} by {{ song.artist }}
       <button (click)="removeSong(song)">Remove</button>
     </li>
   </ul>
 </div>
-

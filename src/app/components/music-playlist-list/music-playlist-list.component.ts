@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {PlaylistService} from "../../services/music-playlist.service";
 
 @Component({
   selector: 'app-music-playlist-list',
@@ -8,14 +9,15 @@ import { Component } from '@angular/core';
 export class MusicPlaylistListComponent {
   songTitle: string = '';
   artistName: string = '';
+  searchTerm: string = '';
 
+  playlist: { title: string; artist: string }[] = [];
+  filteredPlaylist: { title: string; artist: string }[] = [];
 
-  playlist: { title: string; artist: string }[] = [
-    { title: 'Boyfriend', artist: 'ALLMO$ST' },
-    { title: 'Sumugal', artist: 'Hev Abi' },
-    { title: 'When I Was Your Man', artist: 'Bruno Mars' },
-    { title: 'Love Yourself', artist: 'Justine Bieber' }
-  ];
+  constructor(private playlistService: PlaylistService) {
+    this.playlist = this.playlistService.getPlaylist();
+    this.filteredPlaylist = [...this.playlist];
+  }
 
   addSong() {
     if (this.songTitle.trim() && this.artistName.trim()) {
@@ -23,8 +25,8 @@ export class MusicPlaylistListComponent {
         title: this.songTitle.trim(),
         artist: this.artistName.trim(),
       };
-      this.playlist.push(newSong);
-
+      this.playlistService.addSong(newSong);
+      this.updatePlaylist();
       this.songTitle = '';
       this.artistName = '';
     } else {
@@ -33,9 +35,25 @@ export class MusicPlaylistListComponent {
   }
 
   removeSong(song: { title: string; artist: string }) {
-    const index = this.playlist.indexOf(song);
-    if (index > -1) {
-      this.playlist.splice(index, 1);
-    }
+    this.playlistService.removeSong(song);
+    this.updatePlaylist();
+  }
+
+  clearAll() {
+    this.playlistService.clearAllSongs();
+    this.updatePlaylist();
+  }
+
+  searchPlaylist() {
+    const searchLower = this.searchTerm.toLowerCase();
+    this.filteredPlaylist = this.playlist.filter(song =>
+      song.title.toLowerCase().includes(searchLower) ||
+      song.artist.toLowerCase().includes(searchLower)
+    );
+  }
+
+  updatePlaylist() {
+    this.playlist = this.playlistService.getPlaylist();
+    this.searchPlaylist();
   }
 }
