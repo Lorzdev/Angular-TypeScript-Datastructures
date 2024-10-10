@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {GroceryService} from "../../services/grocery-list.service";
 
 @Component({
   selector: 'app-grocery-list',
@@ -8,11 +9,20 @@ import { Component } from '@angular/core';
 
 export class GroceryListComponent {
   groceryItem: string = '';
-  groceryList: string[] = ['Milk', 'Bread', 'Eggs', 'Cheese'];
+  searchTerm: string = '';
+
+  groceryList: string[] = [];
+  filteredGroceryList: string[] = [];
+
+  constructor(private groceryService: GroceryService) {
+    this.groceryList = this.groceryService.getGroceryList();
+    this.filteredGroceryList = [...this.groceryList];
+  }
 
   addGroceryItem() {
     if (this.groceryItem.trim()) {
-      this.groceryList.push(this.groceryItem.trim());
+      this.groceryService.addGroceryItem(this.groceryItem.trim());
+      this.updateGroceryList();
       this.groceryItem = '';
     } else {
       console.log('Please enter an item.');
@@ -20,9 +30,24 @@ export class GroceryListComponent {
   }
 
   removeGroceryItem(item: string) {
-    const index = this.groceryList.indexOf(item);
-    if (index > -1) {
-      this.groceryList.splice(index, 1);
-    }
+    this.groceryService.removeGroceryItem(item);
+    this.updateGroceryList();
+  }
+
+  clearAll() {
+    this.groceryService.clearAllGroceryItems();
+    this.updateGroceryList();
+  }
+
+  searchGroceryList() {
+    const searchLower = this.searchTerm.toLowerCase();
+    this.filteredGroceryList = this.groceryList.filter(item =>
+      item.toLowerCase().includes(searchLower)
+    );
+  }
+
+  updateGroceryList() {
+    this.groceryList = this.groceryService.getGroceryList();
+    this.searchGroceryList();
   }
 }
