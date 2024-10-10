@@ -1,11 +1,14 @@
 <div class="developer-tools-container">
-  <p>Developer Tools List works!</p>
+  <p>Developer Tools List </p>
 
   <input type="text" [(ngModel)]="newTool" placeholder="Enter tool name" />
   <button (click)="addTool()">Add Tool</button>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search tools..." />
+  <button (click)="clearAll()">Clear All</button>
+
   <ul>
-    <li *ngFor="let tool of toolList">
+    <li *ngFor="let tool of filteredToolList()">
       {{ tool }}
       <button (click)="removeTool(tool)">Remove</button>
     </li>

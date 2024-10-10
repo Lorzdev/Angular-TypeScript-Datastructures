@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {DeveloperToolsService} from "../../services/developer-tools-list.service";
 
 @Component({
   selector: 'app-developer-tools-list',
@@ -7,26 +8,33 @@ import { Component } from '@angular/core';
 })
 export class DeveloperToolsListComponent {
   newTool: string = '';
+  searchTerm: string = '';
 
-  toolList: string[] = [
-    'Visual Studio Code',
-    'Git',
-    'Figma',
-    'Hashnode',
-  ];
+  constructor(private developerToolsService: DeveloperToolsService) {}
+
+  get toolList() {
+    return this.developerToolsService.getToolList();
+  }
 
   addTool() {
     if (this.newTool.trim()) {
-      this.toolList.push(this.newTool.trim());
-      this.newTool = '';
+      this.developerToolsService.addTool(this.newTool.trim());
+      this.newTool = ''; // Clear the input field
+    } else {
+      console.log('Please enter a tool name.');
     }
   }
 
   removeTool(tool: string) {
-    const index = this.toolList.indexOf(tool);
-    if (index > -1) {
-      this.toolList.splice(index, 1);
-    }
+    this.developerToolsService.removeTool(tool);
+  }
+
+  clearAll() {
+    this.developerToolsService.clearAll();
+  }
+
+  filteredToolList() {
+    return this.developerToolsService.searchTools(this.searchTerm);
   }
 }
 
