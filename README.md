@@ -18,6 +18,8 @@ Upload it on Firebase hosting.
 
 https://camo-typescript-angular.web.app/
 
+https://camo-angular-services.web.app/
+
 ### Documentation
 
 Document your activity on Hashnode.com. Include the GitHub repository and the web URL from Firebase hosting.
