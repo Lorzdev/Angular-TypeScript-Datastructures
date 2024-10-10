@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {FlowerService} from "../../services/flower-list.service";
 
 @Component({
   selector: 'app-flower-list',
@@ -7,27 +8,28 @@ import { Component } from '@angular/core';
 })
 export class FlowerListComponent {
   flowerName: string = '';
+  searchTerm: string = '';
 
-  flowerList: string[] = [
-    'Rose',
-    'Tulip',
-    'Sunflower',
-    'Daisy',
-  ];
+  constructor(private flowerService: FlowerService) {}
+
+  get flowerList() {
+    return this.flowerService.getFlowerList();
+  }
 
   addFlower() {
-    if (this.flowerName.trim()) {
-      this.flowerList.push(this.flowerName.trim());
-      this.flowerName = '';
-    } else {
-      console.log('Please enter a flower name.');
-    }
+    this.flowerService.addFlower(this.flowerName);
+    this.flowerName = '';
   }
 
   removeFlower(flower: string) {
-    const index = this.flowerList.indexOf(flower);
-    if (index > -1) {
-      this.flowerList.splice(index, 1);
-    }
+    this.flowerService.removeFlower(flower);
+  }
+
+  clearAll() {
+    this.flowerService.clearAll();
+  }
+
+  filteredFlowerList() {
+    return this.flowerService.searchFlowers(this.searchTerm);
   }
 }
