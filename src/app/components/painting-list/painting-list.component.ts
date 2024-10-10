@@ -1,33 +1,36 @@
 import { Component } from '@angular/core';
+import {PaintingService} from "../../services/painting-list.service";
 
 @Component({
   selector: 'app-painting-list',
   templateUrl: './painting-list.component.html',
   styleUrl: './painting-list.component.css'
 })
+
 export class PaintingListComponent {
   paintingName: string = '';
+  searchTerm: string = '';
 
-  paintingList: string[] = [
-    'Starry Night',
-    'Mona Lisa',
-    'The Persistence of Memory',
-    'The Night Watch',
+  constructor(private paintingService: PaintingService) {}
 
-  ];
+  get paintingList() {
+    return this.paintingService.getPaintingList();
+  }
 
   addPainting() {
-    if (this.paintingName.trim()) {
-      this.paintingList.push(this.paintingName.trim());
-      this.paintingName = '';
-      console.log('Please enter a painting name.');
-    }
+    this.paintingService.addPainting(this.paintingName);
+    this.paintingName = '';
   }
 
   removePainting(painting: string) {
-    const index = this.paintingList.indexOf(painting);
-    if (index > -1) {
-      this.paintingList.splice(index, 1);
-    }
+    this.paintingService.removePainting(painting);
+  }
+
+  clearAll() {
+    this.paintingService.clearAll();
+  }
+
+  filteredPaintings() {
+    return this.paintingService.searchPainting(this.searchTerm);
   }
 }
