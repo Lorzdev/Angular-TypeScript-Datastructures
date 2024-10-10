@@ -1,12 +1,14 @@
 <div class="animal-list-container">
-  <p>Animal List works!</p>
+  <p>Animal List </p>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search animals..." (input)="searchAnimals()" />
   <input type="text" [(ngModel)]="animalName" placeholder="Enter animal name" />
 
   <button (click)="addAnimal()">Add Animal</button>
+  <button (click)="clearAll()">Clear All</button>
 
   <ul>
-    <li *ngFor="let animal of animalList">
+    <li *ngFor="let animal of filteredAnimalList">
       {{ animal }}
       <button (click)="removeAnimal(animal)">Remove</button>
     </li>
