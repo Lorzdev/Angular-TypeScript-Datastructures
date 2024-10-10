@@ -1,11 +1,14 @@
 <div class="library-list-container">
-  <p>Library List works!</p>
+  <p>Library List</p>
 
   <input type="text" [(ngModel)]="newLibrary" placeholder="Enter library name" />
   <button (click)="addLibrary()">Add Library</button>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search libraries..." />
+  <button (click)="clearAll()">Clear All</button>
+
   <ul>
-    <li *ngFor="let library of libraryList">
+    <li *ngFor="let library of filteredLibraryList()">
       {{ library }}
       <button (click)="removeLibrary(library)">Remove</button>
     </li>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {LibraryService} from "../../services/library-list.service";
 
 @Component({
   selector: 'app-library-list',
@@ -7,26 +8,32 @@ import { Component } from '@angular/core';
 })
 export class LibraryListComponent {
   newLibrary: string = '';
-  libraryList: string[] = [
+  searchTerm: string = '';
 
-    'Bootstrap',
-    'Moment.js',
-    'jQuery',
-    'Lodash',
+  constructor(private libraryService: LibraryService) {}
 
-  ];
+  get libraryList() {
+    return this.libraryService.getLibraryList();
+  }
 
   addLibrary() {
     if (this.newLibrary.trim()) {
-      this.libraryList.push(this.newLibrary.trim());
+      this.libraryService.addLibrary(this.newLibrary.trim());
       this.newLibrary = ''; // Clear the input field
+    } else {
+      console.log('Please enter a library name.');
     }
   }
 
   removeLibrary(library: string) {
-    const index = this.libraryList.indexOf(library);
-    if (index > -1) {
-      this.libraryList.splice(index, 1);
-    }
+    this.libraryService.removeLibrary(library);
+  }
+
+  clearAll() {
+    this.libraryService.clearAll();
+  }
+
+  filteredLibraryList() {
+    return this.libraryService.searchLibraries(this.searchTerm);
   }
 }
