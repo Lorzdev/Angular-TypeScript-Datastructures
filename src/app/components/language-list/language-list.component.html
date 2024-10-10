@@ -1,12 +1,14 @@
 <div class="language-list-container">
-  <p>Programming Language List wokrs!</p>
+  <p>Programming Language List </p>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search programming languages..." (input)="searchLanguages()" />
   <input type="text" [(ngModel)]="languageName" placeholder="Enter programming language" />
 
   <button (click)="addLanguage()">Add Language</button>
+  <button (click)="clearAll()">Clear All</button>
 
   <ul>
-    <li *ngFor="let language of languageList">
+    <li *ngFor="let language of filteredLanguageList">
       {{ language }}
       <button (click)="removeLanguage(language)">Remove</button>
     </li>

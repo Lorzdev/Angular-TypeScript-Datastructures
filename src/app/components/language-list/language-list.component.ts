@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {LanguageService} from "../../services/language-list.service";
 
 @Component({
   selector: 'app-language-list',
@@ -7,17 +8,19 @@ import { Component } from '@angular/core';
 })
 export class LanguageListComponent {
   languageName: string = '';
+  searchTerm: string = '';
+  languageList: string[] = [];
+  filteredLanguageList: string[] = [];
 
-  languageList: string[] = [
-    'JavaScript',
-    'Python',
-    'Java',
-    'TypeScript',
-  ];
+  constructor(private languageService: LanguageService) {
+    this.languageList = this.languageService.getLanguages();
+    this.filteredLanguageList = [...this.languageList];
+  }
 
   addLanguage() {
     if (this.languageName.trim()) {
-      this.languageList.push(this.languageName.trim());
+      this.languageService.addLanguage(this.languageName.trim());
+      this.updateLanguageList();
       this.languageName = ''; // Clear the input field
     } else {
       console.log('Please enter a language name.');
@@ -25,9 +28,24 @@ export class LanguageListComponent {
   }
 
   removeLanguage(language: string) {
-    const index = this.languageList.indexOf(language);
-    if (index > -1) {
-      this.languageList.splice(index, 1);
-    }
+    this.languageService.removeLanguage(language);
+    this.updateLanguageList();
+  }
+
+  clearAll() {
+    this.languageService.clearAllLanguages();
+    this.updateLanguageList();
+  }
+
+  searchLanguages() {
+    const searchLower = this.searchTerm.toLowerCase();
+    this.filteredLanguageList = this.languageList.filter(language =>
+      language.toLowerCase().includes(searchLower)
+    );
+  }
+
+  updateLanguageList() {
+    this.languageList = this.languageService.getLanguages();
+    this.searchLanguages();
   }
 }
