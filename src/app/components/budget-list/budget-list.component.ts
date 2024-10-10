@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {BudgetService} from "../../services/budget-list.service";
 
 @Component({
   selector: 'app-budget-list',
@@ -8,14 +9,13 @@ import { Component } from '@angular/core';
 export class BudgetListComponent {
   itemName: string = '';
   itemAmount: number | null = null;
+  searchTerm: string = '';
 
+  constructor(private budgetService: BudgetService) {}
 
-  budgetList: { name: string; amount: number }[] = [
-    { name: 'Groceries', amount: 200 },
-    { name: 'Utilities', amount: 150 },
-    { name: 'Rent', amount: 1200 },
-    { name: 'Transportation', amount: 100 },
-  ];
+  get budgetList() {
+    return this.budgetService.getBudgetList();
+  }
 
   addBudgetItem() {
     if (this.itemName.trim() && this.itemAmount !== null) {
@@ -23,8 +23,7 @@ export class BudgetListComponent {
         name: this.itemName.trim(),
         amount: this.itemAmount,
       };
-      this.budgetList.push(newItem);
-
+      this.budgetService.addBudgetItem(newItem);
       this.itemName = '';
       this.itemAmount = null;
     } else {
@@ -33,9 +32,14 @@ export class BudgetListComponent {
   }
 
   removeBudgetItem(item: { name: string; amount: number }) {
-    const index = this.budgetList.indexOf(item);
-    if (index > -1) {
-      this.budgetList.splice(index, 1);
-    }
+    this.budgetService.removeBudgetItem(item);
+  }
+
+  clearAll() {
+    this.budgetService.clearAll();
+  }
+
+  filteredBudgetList() {
+    return this.budgetService.searchBudget(this.searchTerm);
   }
 }

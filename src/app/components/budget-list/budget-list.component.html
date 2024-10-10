@@ -1,13 +1,16 @@
 <div class="budget-list-container">
-  <p>Budget List works!</p>
+  <p>Budget List </p>
 
   <input type="text" [(ngModel)]="itemName" placeholder="Enter budget item name" />
   <input type="number" [(ngModel)]="itemAmount" placeholder="Enter amount" />
   <button (click)="addBudgetItem()">Add Budget Item</button>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search budget items..." />
+  <button (click)="clearAll()">Clear All</button>
+
   <ul>
-    <li *ngFor="let item of budgetList">
-      {{ item.name }} - ${{ item.amount }}
+    <li *ngFor="let item of filteredBudgetList()">
+      {{ item.name }} - P{{ item.amount }}
       <button (click)="removeBudgetItem(item)">Remove</button>
     </li>
   </ul>
