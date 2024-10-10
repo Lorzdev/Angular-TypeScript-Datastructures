@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {PodcastService} from "../../services/podcast-list.service";
 
 @Component({
   selector: 'app-podcast-list',
@@ -7,27 +8,28 @@ import { Component } from '@angular/core';
 })
 export class PodcastListComponent {
   podcastName: string = '';
+  searchTerm: string = '';
 
-  podcastList: string[] = [
+  constructor(private podcastService: PodcastService) {}
 
-    'Stuff You Should Know',
-    'The Daily',
-    'The Dave Ramsey Show',
-  ];
+  get podcastList() {
+    return this.podcastService.getPodcastList();
+  }
 
   addPodcast() {
-    if (this.podcastName.trim()) {
-      this.podcastList.push(this.podcastName.trim());
-      this.podcastName = '';
-    } else {
-      console.log('Please enter a podcast name.');
-    }
+    this.podcastService.addPodcast(this.podcastName);
+    this.podcastName = '';
   }
 
   removePodcast(podcast: string) {
-    const index = this.podcastList.indexOf(podcast);
-    if (index > -1) {
-      this.podcastList.splice(index, 1);
-    }
+    this.podcastService.removePodcast(podcast);
+  }
+
+  clearAll() {
+    this.podcastService.clearAll();
+  }
+
+  filteredPodcasts() {
+    return this.podcastService.searchPodcast(this.searchTerm);
   }
 }

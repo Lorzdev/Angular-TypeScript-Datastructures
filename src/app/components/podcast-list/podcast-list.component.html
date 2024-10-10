@@ -1,11 +1,14 @@
 <div class="podcast-container">
-  <p>Podcast List  works!</p>
+  <p>Podcast List </p>
 
   <input type="text" [(ngModel)]="podcastName" placeholder="Enter podcast episode" />
   <button (click)="addPodcast()">Add Podcast</button>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search podcasts..." />
+  <button (click)="clearAll()">Clear All</button>
+
   <ul>
-    <li *ngFor="let podcast of podcastList">
+    <li *ngFor="let podcast of filteredPodcasts()">
       {{ podcast }}
       <button (click)="removePodcast(podcast)">Remove</button>
     </li>
