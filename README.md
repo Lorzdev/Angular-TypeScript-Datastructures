@@ -17,6 +17,7 @@ Make sure you commit each feature implementation to your GitHub repository. Ensu
 Upload it on Firebase hosting.
 
 https://camo-typescript-angular.web.app/
+https://camo-angular-services.web.app/
 
 ### Documentation
 
