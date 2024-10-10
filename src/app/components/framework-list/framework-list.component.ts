@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {FrameworkService} from "../../services/framework-list.service";
 
 @Component({
   selector: 'app-framework-list',
@@ -6,27 +7,35 @@ import { Component } from '@angular/core';
   styleUrl: './framework-list.component.css'
 })
 
+
 export class FrameworkListComponent {
   newFramework: string = '';
-  frameworkList: string[] = [
-    'Angular',
-    'React',
-    'Vue.js',
-    'Django',
+  searchTerm: string = '';
 
-  ];
+  constructor(private frameworkService: FrameworkService) {}
+
+  get frameworkList() {
+    return this.frameworkService.getFrameworkList();
+  }
 
   addFramework() {
     if (this.newFramework.trim()) {
-      this.frameworkList.push(this.newFramework.trim());
-      this.newFramework = '';
+      this.frameworkService.addFramework(this.newFramework.trim());
+      this.newFramework = ''; // Clear the input field
+    } else {
+      console.log('Please enter a framework name.');
     }
   }
 
   removeFramework(framework: string) {
-    const index = this.frameworkList.indexOf(framework);
-    if (index > -1) {
-      this.frameworkList.splice(index, 1);
-    }
+    this.frameworkService.removeFramework(framework);
+  }
+
+  clearAll() {
+    this.frameworkService.clearAll();
+  }
+
+  filteredFrameworkList() {
+    return this.frameworkService.searchFrameworks(this.searchTerm);
   }
 }

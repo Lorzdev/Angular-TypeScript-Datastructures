@@ -1,11 +1,14 @@
 <div class="framework-list-container">
-  <p>Framework List works!</p>
+  <p>Framework List </p>
 
   <input type="text" [(ngModel)]="newFramework" placeholder="Enter framework name" />
   <button (click)="addFramework()">Add Framework</button>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search frameworks..." />
+  <button (click)="clearAll()">Clear All</button>
+
   <ul>
-    <li *ngFor="let framework of frameworkList">
+    <li *ngFor="let framework of filteredFrameworkList()">
       {{ framework }}
       <button (click)="removeFramework(framework)">Remove</button>
     </li>
