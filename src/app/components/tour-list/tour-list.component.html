@@ -1,11 +1,14 @@
 <div class="tour-list-container">
-  <p>Tour List works</p>
+  <p>Tour List </p>
 
   <input type="text" [(ngModel)]="newTourDate" placeholder="Enter tour date" />
   <button (click)="addTour()">Add Tour Date</button>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search tours..." />
+  <button (click)="clearAll()">Clear All</button>
+
   <ul>
-    <li *ngFor="let tour of tourDates">
+    <li *ngFor="let tour of filteredTourDates()">
       {{ tour }}
       <button (click)="removeTour(tour)">Remove</button>
     </li>

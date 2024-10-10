@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {TourService} from "../../services/tour-list.service";
 
 @Component({
   selector: 'app-tour-list',
@@ -7,24 +8,32 @@ import { Component } from '@angular/core';
 })
 export class TourListComponent {
   newTourDate: string = '';
-  tourDates: string[] = [
-    'December 10, 2024 - Manila, Philippines',
-    'December 15, 2024 - Cebu, Philippines',
-    'December 20, 2024 - Bicol, Philippines',
-    'December 25, 2024 - Davao, Philippines'
-  ];
+  searchTerm: string = '';
+
+  constructor(private tourService: TourService) {}
+
+  get tourDates() {
+    return this.tourService.getTourDates();
+  }
 
   addTour() {
     if (this.newTourDate.trim()) {
-      this.tourDates.push(this.newTourDate.trim());
+      this.tourService.addTour(this.newTourDate.trim());
       this.newTourDate = '';
+    } else {
+      console.log('Please enter a tour date.');
     }
   }
 
   removeTour(tour: string) {
-    const index = this.tourDates.indexOf(tour);
-    if (index > -1) {
-      this.tourDates.splice(index, 1);
-    }
+    this.tourService.removeTour(tour);
+  }
+
+  clearAll() {
+    this.tourService.clearAll();
+  }
+
+  filteredTourDates() {
+    return this.tourService.searchTours(this.searchTerm);
   }
 }
