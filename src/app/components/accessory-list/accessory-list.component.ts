@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AccessoryService} from "../../services/accessory-list.service";
 
 @Component({
   selector: 'app-accessory-list',
@@ -8,31 +9,28 @@ import { Component } from '@angular/core';
 })
 export class AccessoryListComponent {
   accessoryName: string = '';
+  searchTerm: string = '';
 
+  constructor(private accessoryService: AccessoryService) {}
 
-  accessoryList: string[] = [
-    'Sunglasses',
-    'Charger',
-    'Earphones',
-    'Watch',
-    'Bracelet',
-
-
-  ];
+  get accessoryList() {
+    return this.accessoryService.getAccessoryList();
+  }
 
   addAccessory() {
-    if (this.accessoryName.trim()) {
-      this.accessoryList.push(this.accessoryName.trim());
-      this.accessoryName = '';
-    } else {
-      console.log('Please enter an accessory name.');
-    }
+    this.accessoryService.addAccessory(this.accessoryName);
+    this.accessoryName = '';
   }
 
   removeAccessory(accessory: string) {
-    const index = this.accessoryList.indexOf(accessory);
-    if (index > -1) {
-      this.accessoryList.splice(index, 1);
-    }
+    this.accessoryService.removeAccessory(accessory);
+  }
+
+  clearAll() {
+    this.accessoryService.clearAll();
+  }
+
+  filteredAccessories() {
+    return this.accessoryService.searchAccessory(this.searchTerm);
   }
 }

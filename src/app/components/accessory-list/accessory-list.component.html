@@ -1,11 +1,14 @@
 <div class="accessory-container">
-  <p>Accessory List works!</p>
+  <p>Accessory List</p>
 
   <input type="text" [(ngModel)]="accessoryName" placeholder="Enter accessory name" />
   <button (click)="addAccessory()">Add Accessory</button>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search accessories..." />
+  <button (click)="clearAll()">Clear All</button>
+
   <ul>
-    <li *ngFor="let accessory of accessoryList">
+    <li *ngFor="let accessory of filteredAccessories()">
       {{ accessory }}
       <button (click)="removeAccessory(accessory)">Remove</button>
     </li>
