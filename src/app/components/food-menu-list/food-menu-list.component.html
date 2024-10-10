@@ -1,14 +1,16 @@
 <div class="menu-container">
-  <p>Food Menu works!</p>
+  <p>Food Menu </p>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search food item..." (input)="searchFoodMenu()" />
   <input type="text" [(ngModel)]="foodItem" placeholder="Enter food item" />
   <input type="text" [(ngModel)]="foodPrice" placeholder="Enter price" />
 
   <button (click)="addFoodItem()">Add Food Item</button>
+  <button (click)="clearAll()">Clear All</button>
 
   <ul>
-    <li *ngFor="let item of foodMenu">
-      {{ item.name }} - ${{ item.price }}
+    <li *ngFor="let item of filteredFoodMenu">
+      {{ item.name }} - P{{ item.price }}
       <button (click)="removeFoodItem(item)">Remove</button>
     </li>
   </ul>

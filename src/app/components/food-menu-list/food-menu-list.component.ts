@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {FoodMenuService} from "../../services/food-menu-list.service";
 
 @Component({
   selector: 'app-food-menu-list',
@@ -8,12 +9,15 @@ import { Component } from '@angular/core';
 export class FoodMenuListComponent {
   foodItem: string = '';
   foodPrice: string = '';
+  searchTerm: string = '';
 
-  foodMenu: { name: string; price: string }[] = [
-    { name: 'Burger', price: '5.99' },
-    { name: 'Pizza', price: '10.99' },
-    { name: 'Pasta', price: '7.50' }
-  ];
+  foodMenu: { name: string; price: string }[] = [];
+  filteredFoodMenu: { name: string; price: string }[] = [];
+
+  constructor(private foodMenuService: FoodMenuService) {
+    this.foodMenu = this.foodMenuService.getFoodMenu();
+    this.filteredFoodMenu = [...this.foodMenu];
+  }
 
   addFoodItem() {
     if (this.foodItem.trim() && this.foodPrice.trim()) {
@@ -21,8 +25,8 @@ export class FoodMenuListComponent {
         name: this.foodItem.trim(),
         price: this.foodPrice.trim(),
       };
-      this.foodMenu.push(newFood);
-
+      this.foodMenuService.addFoodItem(newFood);
+      this.updateFoodMenu();
       this.foodItem = '';
       this.foodPrice = '';
     } else {
@@ -31,9 +35,24 @@ export class FoodMenuListComponent {
   }
 
   removeFoodItem(food: { name: string; price: string }) {
-    const index = this.foodMenu.indexOf(food);
-    if (index > -1) {
-      this.foodMenu.splice(index, 1);
-    }
+    this.foodMenuService.removeFoodItem(food);
+    this.updateFoodMenu();
+  }
+
+  clearAll() {
+    this.foodMenuService.clearAllFoodItems();
+    this.updateFoodMenu();
+  }
+
+  searchFoodMenu() {
+    const searchLower = this.searchTerm.toLowerCase();
+    this.filteredFoodMenu = this.foodMenu.filter(item =>
+      item.name.toLowerCase().includes(searchLower)
+    );
+  }
+
+  updateFoodMenu() {
+    this.foodMenu = this.foodMenuService.getFoodMenu();
+    this.searchFoodMenu();
   }
 }
