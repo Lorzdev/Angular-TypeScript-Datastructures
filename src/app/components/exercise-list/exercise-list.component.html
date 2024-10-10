@@ -1,11 +1,14 @@
 <div class="exercise-container">
-  <p>Exercise List works!</p>
+  <p>Exercise List </p>
 
   <input type="text" [(ngModel)]="exerciseName" placeholder="Enter exercise name" />
   <button (click)="addExercise()">Add Exercise</button>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search exercises..." />
+  <button (click)="clearAll()">Clear All</button>
+
   <ul>
-    <li *ngFor="let exercise of exerciseList">
+    <li *ngFor="let exercise of filteredExercises()">
       {{ exercise }}
       <button (click)="removeExercise(exercise)">Remove</button>
     </li>

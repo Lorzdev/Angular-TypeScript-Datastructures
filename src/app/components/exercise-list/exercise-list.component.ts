@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ExerciseService} from "../../services/exercise-list.service";
 
 @Component({
   selector: 'app-exercise-list',
@@ -9,28 +10,28 @@ import { Component } from '@angular/core';
 
 export class ExerciseListComponent {
   exerciseName: string = '';
+  searchTerm: string = '';
 
-  exerciseList: string[] = [
-    'Push-ups',
-    'Squats',
-    'Jumping Jacks',
-    'Bicep Curls',
+  constructor(private exerciseService: ExerciseService) {}
 
-  ];
+  get exerciseList() {
+    return this.exerciseService.getExerciseList();
+  }
 
   addExercise() {
-    if (this.exerciseName.trim()) {
-      this.exerciseList.push(this.exerciseName.trim());
-      this.exerciseName = '';
-    } else {
-      console.log('Please enter an exercise name.');
-    }
+    this.exerciseService.addExercise(this.exerciseName);
+    this.exerciseName = '';
   }
 
   removeExercise(exercise: string) {
-    const index = this.exerciseList.indexOf(exercise);
-    if (index > -1) {
-      this.exerciseList.splice(index, 1);
-    }
+    this.exerciseService.removeExercise(exercise);
+  }
+
+  clearAll() {
+    this.exerciseService.clearAll();
+  }
+
+  filteredExercises() {
+    return this.exerciseService.searchExercise(this.searchTerm);
   }
 }
