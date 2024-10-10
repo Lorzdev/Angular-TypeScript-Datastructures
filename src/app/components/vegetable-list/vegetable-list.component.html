@@ -1,12 +1,14 @@
 <div class="vegetable-list-container">
-  <p>Vegetable List works!</p>
+  <p>Vegetable List </p>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search vegetables..." (input)="searchVegetables()" />
   <input type="text" [(ngModel)]="vegetableName" placeholder="Enter vegetable name" />
 
   <button (click)="addVegetable()">Add Vegetable</button>
+  <button (click)="clearAll()">Clear All</button>
 
   <ul>
-    <li *ngFor="let vegetable of vegetableList">
+    <li *ngFor="let vegetable of filteredVegetableList">
       {{ vegetable }}
       <button (click)="removeVegetable(vegetable)">Remove</button>
     </li>

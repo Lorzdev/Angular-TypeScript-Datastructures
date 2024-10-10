@@ -1,33 +1,52 @@
 import { Component } from '@angular/core';
+import {VegetableService} from "../../services/vegetable-list.service";
 
 @Component({
   selector: 'app-vegetable-list',
   templateUrl: './vegetable-list.component.html',
   styleUrl: './vegetable-list.component.css'
 })
+
 export class VegetableListComponent {
   vegetableName: string = '';
+  searchTerm: string = '';
+  vegetableList: string[] = [];
+  filteredVegetableList: string[] = [];
 
-  vegetableList: string[] = [
-    'Carrot',
-    'Potato',
-    'Tomato',
-    'Cucumber',
-  ];
+  constructor(private vegetableService: VegetableService) {
+    this.vegetableList = this.vegetableService.getVegetables();
+    this.filteredVegetableList = [...this.vegetableList];
+  }
 
   addVegetable() {
     if (this.vegetableName.trim()) {
-      this.vegetableList.push(this.vegetableName.trim());
-      this.vegetableName = ''; // Clear the input field
+      this.vegetableService.addVegetable(this.vegetableName.trim());
+      this.updateVegetableList();
+      this.vegetableName = '';
     } else {
       console.log('Please enter a vegetable name.');
     }
   }
 
   removeVegetable(vegetable: string) {
-    const index = this.vegetableList.indexOf(vegetable);
-    if (index > -1) {
-      this.vegetableList.splice(index, 1);
-    }
+    this.vegetableService.removeVegetable(vegetable);
+    this.updateVegetableList();
+  }
+
+  clearAll() {
+    this.vegetableService.clearAllVegetables();
+    this.updateVegetableList();
+  }
+
+  searchVegetables() {
+    const searchLower = this.searchTerm.toLowerCase();
+    this.filteredVegetableList = this.vegetableList.filter(vegetable =>
+      vegetable.toLowerCase().includes(searchLower)
+    );
+  }
+
+  updateVegetableList() {
+    this.vegetableList = this.vegetableService.getVegetables();
+    this.searchVegetables();
   }
 }
