@@ -1,33 +1,29 @@
 import { Component } from '@angular/core';
+import {CountryService} from "../../services/country-list.service";
 
 @Component({
   selector: 'app-country-list',
   templateUrl: './country-list.component.html',
   styleUrl: './country-list.component.css'
 })
+
 export class CountryListComponent {
   countryName: string = '';
   selectedContinent: string = '';
-
-
-  countryList: { name: string; continent: string }[] = [
-    { name: 'Philippines', continent: 'Asia' },
-    { name: 'Indonesia', continent: 'Asia' },
-    { name: 'Thailand', continent: 'Asia' },
-    { name: 'Japan', continent: 'Asia' },
-
-  ];
-
-
+  searchTerm: string = '';
+  countryList: { name: string; continent: string }[] = [];
+  filteredCountryList: { name: string; continent: string }[] = [];
   continents: string[] = ['Asia', 'Europe', 'Africa', 'North America', 'South America', 'Australia', 'Antarctica'];
+
+  constructor(private countryService: CountryService) {
+    this.countryList = this.countryService.getCountries();
+    this.filteredCountryList = [...this.countryList];
+  }
 
   addCountry() {
     if (this.countryName.trim() && this.selectedContinent) {
-      const newCountry = {
-        name: this.countryName.trim(),
-        continent: this.selectedContinent
-      };
-      this.countryList.push(newCountry);
+      this.countryService.addCountry(this.countryName.trim(), this.selectedContinent);
+      this.updateCountryList();
       this.countryName = '';
       this.selectedContinent = '';
     } else {
@@ -36,9 +32,25 @@ export class CountryListComponent {
   }
 
   removeCountry(country: { name: string; continent: string }) {
-    const index = this.countryList.indexOf(country);
-    if (index > -1) {
-      this.countryList.splice(index, 1);
-    }
+    this.countryService.removeCountry(country);
+    this.updateCountryList();
+  }
+
+  clearAll() {
+    this.countryService.clearAllCountries();
+    this.updateCountryList();
+  }
+
+  searchCountries() {
+    const searchLower = this.searchTerm.toLowerCase();
+    this.filteredCountryList = this.countryList.filter(country =>
+      country.name.toLowerCase().includes(searchLower) ||
+      country.continent.toLowerCase().includes(searchLower)
+    );
+  }
+
+  updateCountryList() {
+    this.countryList = this.countryService.getCountries();
+    this.searchCountries();
   }
 }

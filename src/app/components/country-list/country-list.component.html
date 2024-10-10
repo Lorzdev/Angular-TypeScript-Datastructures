@@ -1,6 +1,7 @@
 <div class="country-list-container">
-  <p>Country List works!</p>
+  <p>Country List </p>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search countries..." (input)="searchCountries()" />
   <input type="text" [(ngModel)]="countryName" placeholder="Enter country name" />
   <select [(ngModel)]="selectedContinent">
     <option value="" disabled>Select continent</option>
@@ -8,9 +9,10 @@
   </select>
 
   <button (click)="addCountry()">Add Country</button>
+  <button (click)="clearAll()">Clear All</button>
 
   <ul>
-    <li *ngFor="let country of countryList">
+    <li *ngFor="let country of filteredCountryList">
       {{ country.name }} ({{ country.continent }})
       <button (click)="removeCountry(country)">Remove</button>
     </li>
