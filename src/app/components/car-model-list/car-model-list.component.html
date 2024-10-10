@@ -1,12 +1,18 @@
 <div class="car-model-list-container">
-  <p>CarModel List works!</p>
+  <p>CarModel List </p>
 
+  <!-- Search Input -->
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search car models..." (input)="searchCarModels()" />
+
+  <!-- Add Car Model Input -->
   <input type="text" [(ngModel)]="carModel" placeholder="Enter car model" />
 
   <button (click)="addCarModel()">Add Car Model</button>
+  <button (click)="clearAll()">Clear All</button> <!-- Clear all button -->
 
+  <!-- Car Model List -->
   <ul>
-    <li *ngFor="let car of carModelList">
+    <li *ngFor="let car of filteredCarModelList">
       {{ car.model }}
       <button (click)="removeCarModel(car)">Remove</button>
     </li>

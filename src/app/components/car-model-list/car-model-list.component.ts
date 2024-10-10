@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {CarModelService} from "../../services/car-model-list.service";
 
 @Component({
   selector: 'app-car-model-list',
@@ -7,32 +8,45 @@ import { Component } from '@angular/core';
 })
 export class CarModelListComponent {
   carModel: string = '';
+  searchTerm: string = '';
+  carModelList: { model: string }[] = [];
+  filteredCarModelList: { model: string }[] = [];
 
-
-  carModelList: { model: string }[] = [
-    { model: 'Toyota Corolla' },
-    { model: 'Honda Civic' },
-    { model: 'Ford Mustang' },
-    { model: 'Chevrolet Camaro' },
-    { model: 'Tesla Model S' }
-  ];
+  constructor(private carModelService: CarModelService) {
+    this.carModelList = this.carModelService.getCarModels();
+    this.filteredCarModelList = [...this.carModelList];
+  }
 
   addCarModel() {
     if (this.carModel.trim()) {
-      const newCarModel = {
-        model: this.carModel.trim()
-      };
-      this.carModelList.push(newCarModel);
+      const newCarModel = { model: this.carModel.trim() };
+      this.carModelService.addCarModel(newCarModel);
+      this.updateCarModelLists();
       this.carModel = '';
     } else {
       console.log('Please fill out the car model field.');
     }
   }
 
-  removeCarModel(car: { model: string }) {
-    const index = this.carModelList.indexOf(car);
-    if (index > -1) {
-      this.carModelList.splice(index, 1);
-    }
+  removeCarModel(carModel: { model: string }) {
+    this.carModelService.removeCarModel(carModel);
+    this.updateCarModelLists();
+  }
+
+  clearAll() {
+    this.carModelService.clearAllCarModels();
+    this.updateCarModelLists();
+  }
+
+  searchCarModels() {
+    const searchLower = this.searchTerm.toLowerCase();
+    this.filteredCarModelList = this.carModelList.filter(car =>
+      car.model.toLowerCase().includes(searchLower)
+    );
+  }
+
+  updateCarModelLists() {
+    this.carModelList = this.carModelService.getCarModels(); // Get updated list
+    this.searchCarModels();
   }
 }
