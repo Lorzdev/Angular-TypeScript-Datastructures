@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ComposerService} from "../../services/composer-list.service";
 
 @Component({
   selector: 'app-composer-list',
@@ -8,27 +9,28 @@ import { Component } from '@angular/core';
 
 export class ComposerListComponent {
   composerName: string = '';
+  searchTerm: string = '';
 
-  composerList: string[] = [
-    'Skusta Clee',
-    'Flow G',
-    'Justine Bieber',
-    'Bruno Mars',
-  ];
+  constructor(private composerService: ComposerService) {}
+
+  get composerList() {
+    return this.composerService.getComposerList();
+  }
 
   addComposer() {
-    if (this.composerName.trim()) {
-      this.composerList.push(this.composerName.trim());
-      this.composerName = '';
-    } else {
-      console.log('Please enter a composer name.');
-    }
+    this.composerService.addComposer(this.composerName);
+    this.composerName = '';
   }
 
   removeComposer(composer: string) {
-    const index = this.composerList.indexOf(composer);
-    if (index > -1) {
-      this.composerList.splice(index, 1);
-    }
+    this.composerService.removeComposer(composer);
+  }
+
+  clearAll() {
+    this.composerService.clearAll();
+  }
+
+  filteredComposers() {
+    return this.composerService.searchComposer(this.searchTerm);
   }
 }

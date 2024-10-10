@@ -1,11 +1,14 @@
 <div class="composer-container">
-  <p>Composer List works!</p>
+  <p>Composer List </p>
 
   <input type="text" [(ngModel)]="composerName" placeholder="Enter composer name" />
   <button (click)="addComposer()">Add Composer</button>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search composers..." />
+  <button (click)="clearAll()">Clear All</button>
+
   <ul>
-    <li *ngFor="let composer of composerList">
+    <li *ngFor="let composer of filteredComposers()">
       {{ composer }}
       <button (click)="removeComposer(composer)">Remove</button>
     </li>
