@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {LaptopService} from "../../services/laptop-list.service";
 
 @Component({
   selector: 'app-laptop-list',
@@ -7,29 +8,28 @@ import { Component } from '@angular/core';
 })
 export class LaptopListComponent {
   laptopModel: string = '';
+  searchTerm: string = '';
 
+  constructor(private laptopService: LaptopService) {}
 
-  laptopList: string[] = [
-    'Dell XPS 13',
-    'Apple MacBook Air',
-    'HP Spectre x360',
-    'Lenovo ThinkPad X1 Carbon',
-    'Asus ZenBook 14'
-  ];
+  get laptopList() {
+    return this.laptopService.getLaptopList();
+  }
 
   addLaptop() {
-    if (this.laptopModel.trim()) {
-      this.laptopList.push(this.laptopModel.trim());
-      this.laptopModel = '';
-    } else {
-      console.log('Please enter a laptop model.');
-    }
+    this.laptopService.addLaptop(this.laptopModel);
+    this.laptopModel = '';
   }
 
   removeLaptop(laptop: string) {
-    const index = this.laptopList.indexOf(laptop);
-    if (index > -1) {
-      this.laptopList.splice(index, 1);
-    }
+    this.laptopService.removeLaptop(laptop);
+  }
+
+  clearAll() {
+    this.laptopService.clearAll();
+  }
+
+  filteredLaptops() {
+    return this.laptopService.searchLaptops(this.searchTerm);
   }
 }
