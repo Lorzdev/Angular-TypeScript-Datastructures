@@ -4,8 +4,11 @@
   <input type="text" [(ngModel)]="videoName" placeholder="Enter video name" />
   <button (click)="addVideo()">Add Video</button>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search videos..." />
+  <button (click)="clearAll()">Clear All</button>
+
   <ul>
-    <li *ngFor="let video of videoList">
+    <li *ngFor="let video of filteredVideos()">
       {{ video }}
       <button (click)="removeVideo(video)">Remove</button>
     </li>

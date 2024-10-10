@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {VideoService} from "../../services/video-list.service";
 
 @Component({
   selector: 'app-video-list',
@@ -8,28 +9,28 @@ import { Component } from '@angular/core';
 })
 export class VideoListComponent {
   videoName: string = '';
+  searchTerm: string = '';
 
-  videoList: string[] = [
-    'Introduction to Angular',
-    'Learning TypeScript',
-    'Building Responsive Web Apps',
-    'Understanding Git and GitHub',
-    'Web Development Bootcamp',
-  ];
+  constructor(private videoService: VideoService) {}
+
+  get videoList() {
+    return this.videoService.getVideoList();
+  }
 
   addVideo() {
-    if (this.videoName.trim()) {
-      this.videoList.push(this.videoName.trim());
-      this.videoName = '';
-    } else {
-      console.log('Please enter a video name.');
-    }
+    this.videoService.addVideo(this.videoName);
+    this.videoName = '';
   }
 
   removeVideo(video: string) {
-    const index = this.videoList.indexOf(video);
-    if (index > -1) {
-      this.videoList.splice(index, 1);
-    }
+    this.videoService.removeVideo(video);
+  }
+
+  clearAll() {
+    this.videoService.clearAll();
+  }
+
+  filteredVideos() {
+    return this.videoService.searchVideo(this.searchTerm);
   }
 }
