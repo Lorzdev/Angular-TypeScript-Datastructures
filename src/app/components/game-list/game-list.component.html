@@ -1,12 +1,14 @@
 <div class="game-list-container">
-  <p>Video Game List works!</p>
+  <p>Video Game List </p>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search games..." (input)="searchGames()" />
   <input type="text" [(ngModel)]="gameName" placeholder="Enter game name" />
 
   <button (click)="addGame()">Add Game</button>
+  <button (click)="clearAll()">Clear All</button>
 
   <ul>
-    <li *ngFor="let game of gameList">
+    <li *ngFor="let game of filteredGameList">
       {{ game }}
       <button (click)="removeGame(game)">Remove</button>
     </li>
