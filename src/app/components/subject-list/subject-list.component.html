@@ -1,12 +1,14 @@
 <div class="subject-list-container">
   <p>Subject List</p>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search subjects..." (input)="searchSubjects()" />
   <input type="text" [(ngModel)]="subjectName" placeholder="Enter subject name" />
 
   <button (click)="addSubject()">Add Subject</button>
+  <button (click)="clearAll()">Clear All</button>
 
   <ul>
-    <li *ngFor="let subject of subjectList">
+    <li *ngFor="let subject of filteredSubjectList">
       {{ subject }}
       <button (click)="removeSubject(subject)">Remove</button>
     </li>

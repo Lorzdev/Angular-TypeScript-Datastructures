@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {SubjectService} from "../../services/subject-list.service";
 
 @Component({
   selector: 'app-subject-list',
@@ -8,29 +9,44 @@ import { Component } from '@angular/core';
 
 export class SubjectListComponent {
   subjectName: string = '';
+  searchTerm: string = '';
+  subjectList: string[] = [];
+  filteredSubjectList: string[] = [];
 
-
-  subjectList: string[] = [
-    'INFORMATION ASSURANCE AND SECURITY',
-    'SYSTEM ADMINISTRATION AND MAINTENANCE',
-    'SYSTEM INTEGRATION AND ARCHITECTURE',
-    'NETWORKING 1',
-    'CAPSTONE PROJECT 1'
-  ];
+  constructor(private subjectService: SubjectService) {
+    this.subjectList = this.subjectService.getSubjects();
+    this.filteredSubjectList = [...this.subjectList];
+  }
 
   addSubject() {
     if (this.subjectName.trim()) {
-      this.subjectList.push(this.subjectName.trim());
-      this.subjectName = ''; // Clear the input field
+      this.subjectService.addSubject(this.subjectName.trim());
+      this.updateSubjectList();
+      this.subjectName = '';
     } else {
       console.log('Please enter a subject name.');
     }
   }
 
   removeSubject(subject: string) {
-    const index = this.subjectList.indexOf(subject);
-    if (index > -1) {
-      this.subjectList.splice(index, 1);
-    }
+    this.subjectService.removeSubject(subject);
+    this.updateSubjectList();
+  }
+
+  clearAll() {
+    this.subjectService.clearAllSubjects();
+    this.updateSubjectList();
+  }
+
+  searchSubjects() {
+    const searchLower = this.searchTerm.toLowerCase();
+    this.filteredSubjectList = this.subjectList.filter(subject =>
+      subject.toLowerCase().includes(searchLower)
+    );
+  }
+
+  updateSubjectList() {
+    this.subjectList = this.subjectService.getSubjects();
+    this.searchSubjects();
   }
 }
