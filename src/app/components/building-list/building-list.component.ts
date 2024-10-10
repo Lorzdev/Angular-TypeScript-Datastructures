@@ -1,34 +1,36 @@
 import { Component } from '@angular/core';
+import {BuildingService} from "../../services/building-list.service";
 
 @Component({
   selector: 'app-building-list',
   templateUrl: './building-list.component.html',
   styleUrl: './building-list.component.css'
 })
+
 export class BuildingListComponent {
   buildingName: string = '';
+  searchTerm: string = '';
 
-  // Predefined list of buildings
-  buildingList: string[] = [
-    'Library',
-    'Science Lab',
-    'Computer Lab',
-    'Sports Complex'
-  ];
+  constructor(private buildingService: BuildingService) {}
+
+  get buildingList() {
+    return this.buildingService.getBuildingList();
+  }
 
   addBuilding() {
-    if (this.buildingName.trim()) {
-      this.buildingList.push(this.buildingName.trim());
-      this.buildingName = '';
-    } else {
-      console.log('Please enter a building name.');
-    }
+    this.buildingService.addBuilding(this.buildingName);
+    this.buildingName = '';
   }
 
   removeBuilding(building: string) {
-    const index = this.buildingList.indexOf(building);
-    if (index > -1) {
-      this.buildingList.splice(index, 1);
-    }
+    this.buildingService.removeBuilding(building);
+  }
+
+  clearAll() {
+    this.buildingService.clearAll();
+  }
+
+  filteredBuildings() {
+    return this.buildingService.searchBuilding(this.searchTerm);
   }
 }

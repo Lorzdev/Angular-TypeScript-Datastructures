@@ -1,11 +1,14 @@
 <div class="building-container">
-  <p>Building List works!</p>
+  <p>Building List </p>
 
   <input type="text" [(ngModel)]="buildingName" placeholder="Enter building name" />
   <button (click)="addBuilding()">Add Building</button>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search buildings..." />
+  <button (click)="clearAll()">Clear All</button>
+
   <ul>
-    <li *ngFor="let building of buildingList">
+    <li *ngFor="let building of filteredBuildings()">
       {{ building }}
       <button (click)="removeBuilding(building)">Remove</button>
     </li>
