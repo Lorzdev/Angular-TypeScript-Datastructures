@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {SportsService} from "../../services/sports-list.service";
 
 @Component({
   selector: 'app-sports-list',
@@ -7,18 +8,19 @@ import { Component } from '@angular/core';
 })
 export class SportsListComponent {
   sportName: string = '';
+  searchTerm: string = '';
+  sportsList: string[] = [];
+  filteredSportsList: string[] = [];
 
-  sportsList: string[] = [
-    'Basketball',
-    'Tennis',
-    'Baseball',
-    'Swimming',
-    'Volleyball'
-  ];
+  constructor(private sportsService: SportsService) {
+    this.sportsList = this.sportsService.getSports();
+    this.filteredSportsList = [...this.sportsList];
+  }
 
   addSport() {
     if (this.sportName.trim()) {
-      this.sportsList.push(this.sportName.trim());
+      this.sportsService.addSport(this.sportName.trim());
+      this.updateSportsList();
       this.sportName = '';
     } else {
       console.log('Please enter a sport name.');
@@ -26,9 +28,24 @@ export class SportsListComponent {
   }
 
   removeSport(sport: string) {
-    const index = this.sportsList.indexOf(sport);
-    if (index > -1) {
-      this.sportsList.splice(index, 1);
-    }
+    this.sportsService.removeSport(sport);
+    this.updateSportsList();
+  }
+
+  clearAll() {
+    this.sportsService.clearAllSports();
+    this.updateSportsList();
+  }
+
+  searchSports() {
+    const searchLower = this.searchTerm.toLowerCase();
+    this.filteredSportsList = this.sportsList.filter(sport =>
+      sport.toLowerCase().includes(searchLower)
+    );
+  }
+
+  updateSportsList() {
+    this.sportsList = this.sportsService.getSports();
+    this.searchSports();
   }
 }

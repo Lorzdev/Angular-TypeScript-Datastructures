@@ -1,12 +1,14 @@
 <div class="sports-list-container">
-  <p>Sports List works!</p>
+  <p>Sports List </p>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search sports..." (input)="searchSports()" />
   <input type="text" [(ngModel)]="sportName" placeholder="Enter sport name" />
 
   <button (click)="addSport()">Add Sport</button>
+  <button (click)="clearAll()">Clear All</button>
 
   <ul>
-    <li *ngFor="let sport of sportsList">
+    <li *ngFor="let sport of filteredSportsList">
       {{ sport }}
       <button (click)="removeSport(sport)">Remove</button>
     </li>
