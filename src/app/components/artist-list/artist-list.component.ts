@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ArtistService} from "../../services/artist-list.service";
 
 @Component({
   selector: 'app-artist-list',
@@ -8,27 +9,28 @@ import { Component } from '@angular/core';
 
 export class ArtistListComponent {
   artistName: string = '';
+  searchTerm: string = '';
 
-  artistList: string[] = [
-    'Vincent van Gogh',
-    'Georgia O’Keeffe',
-    'Jackson Pollock',
-    'Henri Matisse'
-  ];
+  constructor(private artistService: ArtistService) {}
+
+  get artistList() {
+    return this.artistService.getArtistList();
+  }
 
   addArtist() {
-    if (this.artistName.trim()) {
-      this.artistList.push(this.artistName.trim());
-      this.artistName = '';
-    } else {
-      console.log('Please enter an artist name.');
-    }
+    this.artistService.addArtist(this.artistName);
+    this.artistName = '';
   }
 
   removeArtist(artist: string) {
-    const index = this.artistList.indexOf(artist);
-    if (index > -1) {
-      this.artistList.splice(index, 1);
-    }
+    this.artistService.removeArtist(artist);
+  }
+
+  clearAll() {
+    this.artistService.clearAll();
+  }
+
+  filteredArtists() {
+    return this.artistService.searchArtist(this.searchTerm);
   }
 }

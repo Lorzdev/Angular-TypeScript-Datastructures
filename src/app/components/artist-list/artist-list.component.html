@@ -1,11 +1,14 @@
 <div class="artist-container">
-  <p>Artist List works!</p>
+  <p>Artist List </p>
 
   <input type="text" [(ngModel)]="artistName" placeholder="Enter artist name" />
   <button (click)="addArtist()">Add Artist</button>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search artists..." />
+  <button (click)="clearAll()">Clear All</button>
+
   <ul>
-    <li *ngFor="let artist of artistList">
+    <li *ngFor="let artist of filteredArtists()">
       {{ artist }}
       <button (click)="removeArtist(artist)">Remove</button>
     </li>
