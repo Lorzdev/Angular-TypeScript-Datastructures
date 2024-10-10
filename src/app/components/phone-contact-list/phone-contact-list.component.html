@@ -1,16 +1,17 @@
 <div class="contact-list-container">
-  <p>Phone Contact List works!</p>
+  <p>Phone Contact List </p>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search contacts..." (input)="searchContacts()" />
   <input type="text" [(ngModel)]="contactName" placeholder="Enter contact name" />
   <input type="text" [(ngModel)]="contactNumber" placeholder="Enter phone number" />
 
   <button (click)="addContact()">Add Contact</button>
+  <button (click)="clearAll()">Clear All</button>
 
   <ul>
-    <li *ngFor="let contact of contactList">
+    <li *ngFor="let contact of filteredContactList">
       {{ contact.name }} - {{ contact.phone }}
       <button (click)="removeContact(contact)">Remove</button>
     </li>
   </ul>
 </div>
-

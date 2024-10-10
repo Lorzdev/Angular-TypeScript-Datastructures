@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ContactService} from "../../services/phone-contact-list.service";
 
 @Component({
   selector: 'app-phone-contact-list',
@@ -8,16 +9,15 @@ import { Component } from '@angular/core';
 export class PhoneContactListComponent {
   contactName: string = '';
   contactNumber: string = '';
+  searchTerm: string = '';
 
-  contactList: { name: string; phone: string }[] = [
-    { name: 'Camo Lorenz ', phone: '09196611932' },
-    { name: 'Amador Kaysie', phone: '09096533340' },
-    { name: 'Decio Rodel', phone: '09853440944' },
-    { name: 'Rodel Calda', phone: '09095488500' },
+  contactList: { name: string; phone: string }[] = [];
+  filteredContactList: { name: string; phone: string }[] = [];
 
-
-
-  ];
+  constructor(private contactService: ContactService) {
+    this.contactList = this.contactService.getContacts();
+    this.filteredContactList = [...this.contactList];
+  }
 
   addContact() {
     if (this.contactName.trim() && this.contactNumber.trim()) {
@@ -25,8 +25,8 @@ export class PhoneContactListComponent {
         name: this.contactName.trim(),
         phone: this.contactNumber.trim(),
       };
-      this.contactList.push(newContact);
-
+      this.contactService.addContact(newContact);
+      this.updateContactList();
       this.contactName = '';
       this.contactNumber = '';
     } else {
@@ -35,9 +35,25 @@ export class PhoneContactListComponent {
   }
 
   removeContact(contact: { name: string; phone: string }) {
-    const index = this.contactList.indexOf(contact);
-    if (index > -1) {
-      this.contactList.splice(index, 1);
-    }
+    this.contactService.removeContact(contact);
+    this.updateContactList();
+  }
+
+  clearAll() {
+    this.contactService.clearAllContacts();
+    this.updateContactList();
+  }
+
+  searchContacts() {
+    const searchLower = this.searchTerm.toLowerCase();
+    this.filteredContactList = this.contactList.filter(contact =>
+      contact.name.toLowerCase().includes(searchLower) ||
+      contact.phone.includes(searchLower)
+    );
+  }
+
+  updateContactList() {
+    this.contactList = this.contactService.getContacts();
+    this.searchContacts();
   }
 }
