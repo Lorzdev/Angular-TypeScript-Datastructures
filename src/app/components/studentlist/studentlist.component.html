@@ -1,12 +1,17 @@
 <div class="student-list-container">
-  <p>Student List works!</p>
+  <p>Student List</p>
+
+  <!-- Search Input -->
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search by name" (input)="searchStudents()">
+
   <input type="text" [(ngModel)]="name" placeholder="Enter name">
   <input type="text" [(ngModel)]="course" placeholder="Enter course">
   <input type="text" [(ngModel)]="section" placeholder="Enter section">
 
   <button (click)="addItem()">Add Student</button>
+  <button (click)="clearAll()">Clear All</button>
 
   <ul>
-    <li *ngFor="let student of studentList">{{ student }}</li>
+    <li *ngFor="let student of filteredStudentList">{{ student }}</li>
   </ul>
 </div>

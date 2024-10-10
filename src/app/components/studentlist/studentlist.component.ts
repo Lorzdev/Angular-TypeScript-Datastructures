@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {StudentService} from "../../services/studentlist.service";
 
 @Component({
   selector: 'app-studentlist',
@@ -6,29 +7,51 @@ import { Component } from '@angular/core';
   styleUrls: ['./studentlist.component.css']
 })
 export class StudentlistComponent {
-
   name: string = '';
   course: string = '';
   section: string = '';
-  studentList: string[] = [
-     'Name: Lorenz Camo, Course: BSIT, Section: 4A',
-     'Name: Decio Rodel, Course: BSIT, Section: 4A',
-     'Name: Calda Rodel, Course: BSIT, Section: 4A',
-     'Name: Amador Kaysie, Course: BSIT, Section: 4A',
+  searchTerm: string = '';
+  studentList: string[] = [];
+  filteredStudentList: string[] = [];
 
-  ];
+  constructor(private studentService: StudentService) {
+    this.studentList = this.studentService.getStudents();
+    this.filteredStudentList = [...this.studentList];
+  }
 
   addItem() {
     if (this.name.trim() && this.course.trim() && this.section.trim()) {
       const studentInfo = `Name: ${this.name.trim()} , Course: ${this.course.trim()}, Section: ${this.section.trim()}`;
-      this.studentList.push(studentInfo);
-
-      this.name = '';
-      this.course = '';
-      this.section = '';
-    }
-    else {
+      this.studentService.addStudent(studentInfo);
+      this.updateStudentLists();
+      this.clearInputs();
+    } else {
       console.log('Please fill out all fields.');
     }
   }
+
+  clearInputs() {
+    this.name = '';
+    this.course = '';
+    this.section = '';
+  }
+
+  clearAll() {
+    this.studentService.clearAllStudents();
+    this.updateStudentLists();
+  }
+
+  searchStudents() {
+    const searchLower = this.searchTerm.toLowerCase();
+    this.filteredStudentList = this.studentList.filter(student =>
+      student.toLowerCase().includes(searchLower)
+    );
+  }
+
+  updateStudentLists() {
+    this.studentList = this.studentService.getStudents();
+    this.searchStudents();
+  }
+
 }
+
