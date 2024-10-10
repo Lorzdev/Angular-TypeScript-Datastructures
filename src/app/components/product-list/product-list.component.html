@@ -1,14 +1,16 @@
 <div class="product-list-container">
-  <p>Product List works!</p>
+  <p>Product List </p>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search products..." (input)="searchProducts()" />
   <input type="text" [(ngModel)]="productName" placeholder="Enter product name" />
-  <input type="text" [(ngModel)]="productPrice" placeholder="Enter product price" />
+  <input type="number" [(ngModel)]="productPrice" placeholder="Enter product price" />
 
   <button (click)="addProduct()">Add Product</button>
+  <button (click)="clearAll()">Clear All</button>
 
   <ul>
-    <li *ngFor="let product of productList">
-      {{ product.name }} -- ${{ product.price }}
+    <li *ngFor="let product of filteredProductList">
+      {{ product.name }} -- {{ product.price }}
       <button (click)="removeProduct(product)">Remove</button>
     </li>
   </ul>

@@ -1,30 +1,28 @@
 import { Component } from '@angular/core';
+import {ProductService} from "../../services/product-list.service";
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css'
 })
-
 export class ProductListComponent {
   productName: string = '';
   productPrice: number | null = null;
+  searchTerm: string = '';
+  productList: { name: string; price: number }[] = [];
+  filteredProductList: { name: string; price: number }[] = [];
 
-  productList: { name: string; price: number }[] = [
-    { name: 'Laptop', price: 1200 },
-    { name: 'Smartphone', price: 800 },
-    { name: 'Headphones', price: 200 },
-    { name: 'Tablet', price: 500 },
-    { name: 'Smartwatch', price: 250 }
-  ];
+  constructor(private productService: ProductService) {
+    this.productList = this.productService.getProducts();
+    this.filteredProductList = [...this.productList];
+  }
 
   addProduct() {
     if (this.productName.trim() && this.productPrice !== null && this.productPrice > 0) {
-      const newProduct = {
-        name: this.productName.trim(),
-        price: this.productPrice
-      };
-      this.productList.push(newProduct);
+      const newProduct = { name: this.productName.trim(), price: this.productPrice };
+      this.productService.addProduct(newProduct);
+      this.updateProductList();
       this.productName = '';
       this.productPrice = null;
     } else {
@@ -33,9 +31,24 @@ export class ProductListComponent {
   }
 
   removeProduct(product: { name: string; price: number }) {
-    const index = this.productList.indexOf(product);
-    if (index > -1) {
-      this.productList.splice(index, 1);
-    }
+    this.productService.removeProduct(product);
+    this.updateProductList();
+  }
+
+  clearAll() {
+    this.productService.clearAllProducts();
+    this.updateProductList();
+  }
+
+  searchProducts() {
+    const searchLower = this.searchTerm.toLowerCase();
+    this.filteredProductList = this.productList.filter(product =>
+      product.name.toLowerCase().includes(searchLower)
+    );
+  }
+
+  updateProductList() {
+    this.productList = this.productService.getProducts();
+    this.searchProducts();
   }
 }
