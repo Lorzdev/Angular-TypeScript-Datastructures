@@ -24,3 +24,6 @@ export class EmployeeService {
     this.employeeList = [];
   }
 }
+
+export class EmployeeListService {
+}
