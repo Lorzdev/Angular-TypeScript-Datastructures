@@ -1,11 +1,14 @@
 <div class="hardware-container">
-  <p>Computer Hardware List works!</p>
+  <p>Computer Hardware </p>
 
   <input type="text" [(ngModel)]="hardwareItem" placeholder="Enter hardware component" />
   <button (click)="addHardware()">Add Component</button>
 
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Search hardware..." />
+  <button (click)="clearAll()">Clear All</button>
+
   <ul>
-    <li *ngFor="let item of hardwareList">
+    <li *ngFor="let item of filteredHardware()">
       {{ item }}
       <button (click)="removeHardware(item)">Remove</button>
     </li>
