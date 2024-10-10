@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "camo-typescript-angular"
-  }
+    "default": "camo-angular-services",
+    "lorenz": "camo-angular-services"
+  },
+  "targets": {},
+  "etags": {}
 }

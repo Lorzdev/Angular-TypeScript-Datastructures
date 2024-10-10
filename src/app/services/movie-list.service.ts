@@ -30,3 +30,6 @@ export class MovieService {
     this.movieList = [];
   }
 }
+
+export class MovieListService {
+}

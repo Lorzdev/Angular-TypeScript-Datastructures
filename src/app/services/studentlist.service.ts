@@ -24,5 +24,3 @@ export class StudentService {
   }
 }
 
-export class StudentlistService {
-}

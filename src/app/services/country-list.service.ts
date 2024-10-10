@@ -31,3 +31,6 @@ export class CountryService {
     this.countryList = [];
   }
 }
+
+export class CountryListService {
+}
